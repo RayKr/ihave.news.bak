@@ -103,18 +103,18 @@
   <meta name="keywords" content="hexo,github,blog,travis," />
 
 
-<meta name="description" content="Reader Writer">
+<meta name="description" content="最近玩slack接触到 Travis CI，又突然想起自己好久没写技术blog了，想想尘封已久的hexo+coding.net，心想能不能把Travis CI加进去。 先列举要用到的东西：  Hexo - 快速、简洁且高效的博客框架 Github Pages - 完美的静态博客服务器（除大陆网速外） NexT - 一款高质量且简洁优雅的Hexo主题 Travis CI - 一个持续集成测试工具">
 <meta name="keywords" content="hexo,github,blog,travis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Hexo+Github+TravisCI搭建自动发布的静态博客系统">
 <meta property="og:url" content="http://ihave.news/post/知识库/hexo-github-travis-blog.html">
 <meta property="og:site_name" content="iHave.News">
-<meta property="og:description" content="Reader Writer">
+<meta property="og:description" content="最近玩slack接触到 Travis CI，又突然想起自己好久没写技术blog了，想想尘封已久的hexo+coding.net，心想能不能把Travis CI加进去。 先列举要用到的东西：  Hexo - 快速、简洁且高效的博客框架 Github Pages - 完美的静态博客服务器（除大陆网速外） NexT - 一款高质量且简洁优雅的Hexo主题 Travis CI - 一个持续集成测试工具">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-09T02:19:55.594Z">
+<meta property="og:updated_time" content="2018-02-09T05:05:19.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo+Github+TravisCI搭建自动发布的静态博客系统">
-<meta name="twitter:description" content="Reader Writer">
+<meta name="twitter:description" content="最近玩slack接触到 Travis CI，又突然想起自己好久没写技术blog了，想想尘封已久的hexo+coding.net，心想能不能把Travis CI加进去。 先列举要用到的东西：  Hexo - 快速、简洁且高效的博客框架 Github Pages - 完美的静态博客服务器（除大陆网速外） NexT - 一款高质量且简洁优雅的Hexo主题 Travis CI - 一个持续集成测试工具">
 
 
 
@@ -224,6 +224,24 @@
             <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
 
       
     </ul>
@@ -270,7 +288,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -349,7 +367,46 @@
       
 
       
-        
+        <p>最近玩slack接触到 <code>Travis CI</code>，又突然想起自己好久没写技术blog了，想想尘封已久的hexo+coding.net，心想能不能把Travis CI加进去。</p>
+<p>先列举要用到的东西：</p>
+<ul>
+<li>Hexo - 快速、简洁且高效的博客框架</li>
+<li>Github Pages - 完美的静态博客服务器（除大陆网速外）</li>
+<li>NexT - 一款高质量且简洁优雅的Hexo主题</li>
+<li>Travis CI - 一个持续集成测试工具</li>
+</ul>
+<p>其中，Travis CI 是我最新接触的，它是一款很好用的持续集成测试工具。它可以自动关联Github上的项目并且clone下来编译测试，现在就是利用它这一特性来实现hexo博客自动编译、部署。</p>
+<h2 id="步骤及重点"><a href="#步骤及重点" class="headerlink" title="步骤及重点"></a>步骤及重点</h2><p>一些网上和官方文档都很明确的步骤不再详细叙述，只做记录，提高效率。</p>
+<h3 id="一、先搞Hexo"><a href="#一、先搞Hexo" class="headerlink" title="一、先搞Hexo"></a>一、先搞Hexo</h3><p>Hexo建站参考<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">Hexo官方文档</a></p>
+<p>没难度，需要注意几个点：</p>
+<ol>
+<li><p>增加<code>hexo-deployer-git</code>依赖，防止部署时报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加<code>hexo-util</code>到<code>dev</code>依赖，防止travis的npm版本&lt;3,出现的<code>Error: Cannot find module &#39;hexo-util&#39;</code>错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev hexo-util</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="二、配置Github"><a href="#二、配置Github" class="headerlink" title="二、配置Github"></a>二、配置Github</h3><p>建库、同步本地什么的都是github基础操作，注意一点，建两个分支，<code>master</code>分支和对应源码，<code>gh-pages</code>分支作为hexo生成的静态页面上传分支。网上很多都说要用到xxx.github.io这个项目的，其实没必要，只需要推到其他分支即可，然后在setting里配置要作为页面显示的是哪个分支即可。</p>
+<h3 id="三、使用NexT主题"><a href="#三、使用NexT主题" class="headerlink" title="三、使用NexT主题"></a>三、使用NexT主题</h3><p>这个可以参考<a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.cn.md" target="_blank" rel="noopener">Next帮助文档</a>，步骤说明很详细。</p>
+<p>其中需要注意的点：</p>
+<ol>
+<li>就是上边说的hexo-util的问题，已给出解决办法。</li>
+<li>关于语言的问题，<code>v5.1.x</code>版本的中文是<code>zh-Hans</code>，而<code>v6.0.0</code>的中文是<code>zh-CN</code>，注意区分。</li>
+<li>关于主题的配置文件，采用了<code>Hexo data files</code>特性，利用这个特性，可以放心更新next主题，而不担心配置丢失或烦于合并。</li>
+<li><code>v6.0.0</code>的fancybox移至外部仓库依赖，所以需要自行添加，添加方法参见<a href="https://github.com/theme-next/theme-next-fancybox" target="_blank" rel="noopener">详细安装步骤</a>。</li>
+</ol>
+<h3 id="四、配置Travis-CI"><a href="#四、配置Travis-CI" class="headerlink" title="四、配置Travis CI"></a>四、配置Travis CI</h3><p>重点来了，详细步骤可参考<a href="https://segmentfault.com/a/1190000004667156" target="_blank" rel="noopener">用 Travis CI 自动部署 hexo</a>，作者已经说的比较详细。</p>
+<p>需要注意的一点是：在<code>package.json</code>中增加<code>depoly</code>的命令行语句，防止travis在自动执行到<code>npm run deploy</code>这一步的时候报找不到该script的错。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "deploy": "hexo clean &amp;&amp; hexo g -d"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>上述代码加在<code>dependencies</code>同级即可。</p>
+<p>其实配置完Travis发现，其实原理就是让Travis在云上帮我们执行本地化的编译、部署等操作，它也需要git pull项目下来，npm install安装依赖，hexo d -g去编译静态博客，并且依旧需要遵循github的权限验证，所以才需要配置了共私钥对。</p>
+<p>举一反三，通过这个博客的配置，同时也学会了使用Travis做持续集成测试。除了可以应用到其他项目中去，同时也开启了新世界的大门。</p>
+<h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><ol>
+<li>配置自定义的css样式，主题目录下<code>source/css/_custom/custom.styl</code></li>
+<li></li>
+</ol>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>在此基础上，研究slack集成travis，让每次自动测试的结果及时推送到slack上，完美！</p>
+
       
     </div>
     
@@ -442,10 +499,23 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Tsunglei Ching" />
             
               <p class="site-author-name" itemprop="name">Tsunglei Ching</p>
               <p class="site-description motion-element" itemprop="description">Reader Writer</p>
@@ -468,14 +538,14 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
                     
                     <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -483,7 +553,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -496,7 +566,7 @@
                     
                     <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -534,6 +604,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤及重点"><span class="nav-number">1.</span> <span class="nav-text">步骤及重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、先搞Hexo"><span class="nav-number">1.1.</span> <span class="nav-text">一、先搞Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、配置Github"><span class="nav-number">1.2.</span> <span class="nav-text">二、配置Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、使用NexT主题"><span class="nav-number">1.3.</span> <span class="nav-text">三、使用NexT主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、配置Travis-CI"><span class="nav-number">1.4.</span> <span class="nav-text">四、配置Travis CI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个性化"><span class="nav-number">2.</span> <span class="nav-text">个性化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">3.</span> <span class="nav-text">后续</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

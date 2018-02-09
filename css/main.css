@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #1dbd95;
+  background: #52200f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2909,4 +2909,7 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
+}
+.site-title {
+  font-family: 'Lobster Two', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
