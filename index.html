@@ -444,6 +444,7 @@
 <p>举一反三，通过这个博客的配置，同时也学会了使用Travis做持续集成测试。除了可以应用到其他项目中去，同时也开启了新世界的大门。</p>
 <h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><ol>
 <li>配置自定义的css样式，主题目录下<code>source/css/_custom/custom.styl</code></li>
+<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT使用说明</a></li>
 </ol>
 <h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>在此基础上，研究slack集成travis，让每次自动测试的结果及时推送到slack上，完美！</p>
 
@@ -496,7 +497,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/Test.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/javascritp-skills.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -515,7 +516,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/uncategorized/Test.html" itemprop="url">Test</a></h2>
+                <a class="post-title-link" href="/post/uncategorized/javascritp-skills.html" itemprop="url">阮一峰Javascript笔记</a></h2>
         
 
         <div class="post-meta">
@@ -527,7 +528,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-08T21:43:03+08:00">2018-02-08</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-24T09:25:06+08:00">2017-05-24</time>
             
 
             
@@ -566,7 +567,204 @@
       
         
           
-            <p>This is a test post.</p>
+            <h2 id="Javascript闭包"><a href="#Javascript闭包" class="headerlink" title="Javascript闭包"></a>Javascript闭包</h2><p>由于JS的“链式作用域”结构（子对象会一级级向上寻找到父对象的所有变量，而父对象却不能访问子对象的变量），如果想让外部访问方法内的局部变量，则要使用闭包。</p>
+<p>闭包就是能够读取其他函数内部变量的函数，在Javascript中，可以理解成“定义在一个函数内部的函数”。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="number">999</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        alert(n); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> result=f1();</span><br><span class="line">result(); <span class="comment">// 999</span></span><br></pre></td></tr></table></figure>
+<p>这段代码中，<code>f2</code> 就是闭包。其实在平常的vue使用过程中，关于 <code>this</code> 指代 <code>vm</code> 的问题上就是闭包。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name : <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()()); <span class="comment">// My Object</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name : <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()()); <span class="comment">// The Window</span></span><br></pre></td></tr></table></figure>
+<p>通过以上两个示例，则可以理解闭包的含义。</p>
+<h2 id="获取网页大小（clientWidth和clientHeight）"><a href="#获取网页大小（clientWidth和clientHeight）" class="headerlink" title="获取网页大小（clientWidth和clientHeight）"></a>获取网页大小（clientWidth和clientHeight）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.compatMode == <span class="string">"BackCompat"</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">document</span>.body.clientWidth,</span><br><span class="line">            height: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            height: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法就是获取网页（视口）大小，但是要注意：</p>
+<ol>
+<li>这个方法必须要在页面加载完成后才能运行，否则document对象还没生成，会报错。</li>
+<li>大多数情况 <code>document.documentElement.clientWidth</code> 返回正确值，但是IE6是 <code>document.body.clientWidth</code>。</li>
+<li>clientWidth和clientHeight都是只读属性，不能对它们赋值。</li>
+</ol>
+<p>获取带滚动条的网页大小的方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPagearea</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.compatMode == <span class="string">"BackCompat"</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.scrollWidth,</span><br><span class="line">　　　　　　　　　　　　　　　<span class="built_in">document</span>.body.clientWidth),</span><br><span class="line">            height: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.scrollHeight,</span><br><span class="line">　　　　　　　　　　　　　　　　<span class="built_in">document</span>.body.clientHeight)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.documentElement.scrollWidth,</span><br><span class="line">　　　　　　　　　　　　　　　　<span class="built_in">document</span>.documentElement.clientWidth),</span><br><span class="line">            height: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.documentElement.scrollHeight,</span><br><span class="line">　　　　　　　　　　　　　　　　<span class="built_in">document</span>.documentElement.clientHeight)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取元素位置还可以使用 <code>getBoundingClientRect()</code> 方法，它返回一个对象，其中包含了left、right、top、bottom四个属性，分别对应了该元素的左上角和右下角相对于浏览器窗口（viewport）左上角的距离。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> X= <span class="keyword">this</span>.getBoundingClientRect().left;</span><br><span class="line"><span class="keyword">var</span> Y =<span class="keyword">this</span>.getBoundingClientRect().top;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/music/netease-cloud-notes.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/music/netease-cloud-notes.html" itemprop="url">网易云上的神评论</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-11T14:34:59+08:00">2017-03-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/music/" itemprop="url" rel="index"><span itemprop="name">music</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>你的酒窝没有酒，我却醉的像条狗。 –《你就是我最想要的丫头》</p>
+<p>BGM是爱的自杀，再问供养。 –《爱的供养》</p>
+<p>我想念你一如独自夹腿的悲伤。 –《我想念你一如独自撸管的悲伤》</p>
+<p>为了抱那一个人，毕业流着泪把全班都抱了一遍。 –《空白格》</p>
+<p>男人看前任基本都是怀念 女人看前任基本都是渣男。 –《长镜头Live》</p>
+<p>人生真是讽刺，一个人竟然可以变成自己曾经最讨厌的样子。 –《流浪记》</p>
+<p>26小时看完26集的《我可能不会爱你》，真的是“十年修得柯景腾,百年修得王小贱,千年修得李大仁。” –《我不会喜欢你》</p>
+<p>你亲手给丈夫穿上的衣服，被另外一个女人脱下。 –《画心》</p>
+<p>我以为我会暴富，但是我没有。 –《领悟》</p>
+<p>不戴金箍，如何救你；戴了金箍，如何爱你。 –《一生所爱》</p>
+<p>当你的心再也装不下一个逼，去装远方。 –《流浪者》</p>
+<p>我脱掉袈裟我保护不了众生，我穿上袈裟我爱不了你，唐僧最后选择了世间大爱。 –《女儿情》</p>
+<p>立白歌手，我是洗衣液。 –《李白》</p>
+<p>单身狗：我要这铁棒有何用。 –《悟空》</p>
+<p>今天去看了大圣归来。 我旁边有个小孩儿问他妈妈 “这个不是动画片么？为什么有这么多大人来看？” 他妈妈回答： “因为他们一直在等大圣归来啊，等啊等啊，就长大了.” –《悟空》</p>
+<p>师傅，你在打谁？？ 我谁也没打，谁也打不死。 –《眉间雪》</p>
+<p>无人伴我以春秋，无人伴我以诗酒，到最后，竟也无人伴我共白首。 –《解得红尘似一人》</p>
+<p>不许点歌词报错！！！ –《错错错》</p>
+<p>在高考前晚同桌在宾馆放着听的，结果高考真的错错错，现在已经毕业一年了，那个同桌已经不知道去哪了… –《错错错（中文版）》</p>
+<p>我记得我非主流时候的自拍调了阿宝色 然后上面添加文字:你的爱是我曾经吸到肺里的烟。。。。 –《十一年》</p>
+<p>什么是爱情代罪的羔羊？ 大概就是备胎吧  –《爱情转移》</p>
+<p>人生第一大错觉：她喜欢你。 –《不要说话》</p>
+<p>据说程序猿听到最后一句是“爱是用心码，不要说话” –《不要说话》</p>
+<p>我来到你的城市，你却不管饭吃，你会不会忽然的出现，在街角的挖掘机上面。 –《好久不见》</p>
+<p>我一抬头，就看见了，那胳肢窝…… –《阴天快乐》</p>
+<p>写歌的人假正经，听歌的人最无情。人要是矫情起来，听什么都像在唱自己。 –《阴天快乐》</p>
+<p>考59分比考0分更难过，最痛苦的不是不曾拥有，而是差一点就可以。 –《淘汰》</p>
+<p>我总嚷嚷着要找对象，可是从来没有主动想要去勾搭谁，我害怕快餐爱情，害怕分开，害怕最后我认真了别人却只是敷衍 所以我等，等一个到最后还在我身边的人，我坚持或者偏执的相信有一个人会看穿我假装的冷漠，真正的靠近我留在我身边爱着我也给我一个机会去爱她 如果最后能在一起，那么晚点也没关系。 –《淘汰》</p>
+<p>备胎三神曲：《七友》《烂泥》《钟无艳》你给我死远点三神曲：《空港》《药别停》《富士山下》日错了对象神曲：《放生》《坏人》《爱情买卖》荷尔蒙神曲：《脱掉》《对爱渴望》《火烧的寂寞》真·有故事神曲《伤逝》《倾城》《流浪记》都唱完以后保证别人会有一种“这家伙到底都经历过些什么”的错觉。  –《富士山下》</p>
+<p>多少人以朋友的名义默默的爱着！！！ –《十年》</p>
+<p>百无一用是深情，不屑一顾是相思。 –《一丝不挂》</p>
+<p>守着那只鸡  –《今生你作伴》</p>
+<p>谢谢你陪我校服到礼服。 –张敬轩《断点》</p>
+<p>你别皱眉，我走就好。 –刘若英《很爱很爱你》</p>
+<p>最怕一生碌碌无为，还说平凡难能可贵。 –白亮《孙大剩》</p>
+<p>“你还记得她吗？”“早忘了，哈哈”“我还没说是谁。” –Pianoboy《The truth that you leave》</p>
+<p>理想就是离乡。 –赵雷《理想》</p>
+<p>喜欢这种东西，捂住嘴巴，也会从眼睛里跑出来。 –Ryan Gosling《City Of Stars - Pier》</p>
+<p>祝你们幸福是假的，祝你幸福是真的。 –好妹妹乐队《我到外地去看你》</p>
+<p>周杰伦把爱情比喻成龙卷风，我觉得特别贴切。因为很多人，像我。一辈子都没见过龙卷风。 –周杰伦《龙卷风》</p>
+<p>有多少人戴着耳机听着自己情有独钟的音乐，孤独的在拥挤的公交车上日日夜夜，在不是自己的城市里孤独的生活着。 –Dustin O’Halloran《Runner》</p>
+<p>我头一次看到有人把约炮说的这么清新脱俗。 -好妹妹乐队《我说今晚月光那么美,你说是的》</p>
+<p>你的爱 像是备胎弄的咖啡 -比莉《Dear John》</p>
+<p>还是那句，如果有一首歌，不曾流行，也不会过时，那就是民谣吧。 -宋冬野《卡比巴拉的海》</p>
+<p>知道等不到你，但还是要等你，等你笑着说“谢谢你”。 -严艺丹《等》</p>
 
           
         
@@ -617,7 +815,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/hello-world.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/vue-tips.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -636,7 +834,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/uncategorized/hello-world.html" itemprop="url">Hello World</a></h2>
+                <a class="post-title-link" href="/post/front-end/vue-tips.html" itemprop="url">Vue开发小提示</a></h2>
         
 
         <div class="post-meta">
@@ -648,7 +846,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-08T12:06:56+08:00">2018-02-08</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T22:55:14+08:00">2017-03-07</time>
             
 
             
@@ -657,6 +855,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -687,17 +903,913 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <h3 id="v-for嵌套取index"><a href="#v-for嵌套取index" class="headerlink" title="v-for嵌套取index"></a>v-for嵌套取index</h3><p>多层v-for嵌套取各自的index的方法: 给各自的index起名。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(cabin,cabinIndex) in content.data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(area, index) in cabin.areas"</span>&gt;</span></span><br><span class="line">        &#123;&#123;cabinIndex&#125;&#125; - &#123;&#123;index&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="带参数的计算属性替换方案"><a href="#带参数的计算属性替换方案" class="headerlink" title="带参数的计算属性替换方案"></a>带参数的计算属性替换方案</h3><p>绑定Class和Style时，从json中获取出值作为参数计算后设置，如果使用计算属性是无法实现的，因为<code>computed</code>不能带参数，此时可以用<code>methods</code>来实现：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">'devPosition(device.axisX,device.axisY)'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    methods: &#123;</span><br><span class="line">        devPosition: <span class="function"><span class="keyword">function</span> (<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="string">"left"</span>: x + <span class="string">"px"</span>,</span><br><span class="line">                <span class="string">"top"</span>: y + <span class="string">"px"</span></span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Vue替代-function"><a href="#Vue替代-function" class="headerlink" title="Vue替代$(function())"></a>Vue替代$(function())</h3><p>实现方式可以使用<code>mounted</code>，意为在生命周期的挂载完成后执行的内容，并且在方法内可使用jquery的写法。Vue2.0是<code>mounted</code>,Vue1.0是<code>ready</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    mounted: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        initCurrentPage();</span><br><span class="line">        bundleEvent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="数组中间位置添加-删除值"><a href="#数组中间位置添加-删除值" class="headerlink" title="数组中间位置添加/删除值"></a>数组中间位置添加/删除值</h3><p>操作Vue的JSON数组时，为了避免不能正确获取index和length，一般都使用<code>splice</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.areas.splice(index+<span class="number">1</span>, <span class="number">0</span>, json);</span><br></pre></td></tr></table></figure></p>
+<h3 id="Vue更新DOM后刷新"><a href="#Vue更新DOM后刷新" class="headerlink" title="Vue更新DOM后刷新"></a>Vue更新DOM后刷新</h3><p>如果要实现修改了vm的data后，DOM更新结束后立刻调用一些操作（比如jquery的操作等），可以使用<code>nextTick(callback)</code>来实现，详细说明查看<a href="http://cn.vuejs.org/v2/guide/reactivity.html#异步更新队列" target="_blank" rel="noopener">异步更新队列</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">      copyCabin: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">var</span> vm = <span class="keyword">this</span>,</span><br><span class="line">              data = vm.content.data,</span><br><span class="line">              index = data.length - <span class="number">1</span>,</span><br><span class="line">              node = data[index];</span><br><span class="line">          data.push(node);</span><br><span class="line">          <span class="comment">// DOM更新后，重载插件绑定事件</span></span><br><span class="line">          vm.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">              enableFunc();</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="JS的Math"><a href="#JS的Math" class="headerlink" title="JS的Math"></a>JS的Math</h3><p>四舍五入用<code>Math.round(x)</code>，直接舍弃小数取整数用<code>Math.floor(x)</code></p>
+<h3 id="组件Template不能多根节点"><a href="#组件Template不能多根节点" class="headerlink" title="组件Template不能多根节点"></a>组件Template不能多根节点</h3><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue.js:2532[Vue warn]: Cannot use v-for on stateful component root element because it renders multiple elements:</span><br></pre></td></tr></table></figure>
+<p>原因是当抽取组件模板放置到 <code>&lt;template&gt;</code> 标签中时， <code>v-for</code> 循环不可以放置在根节点，因为会导致出现多根情况，如遇此状况，可以在外层再套一层 <code>div</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">"devList"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"dev1 in devs"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"float-div-vue-for"</span> <span class="attr">:ename</span>=<span class="string">"dev1.name"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">:id</span>=<span class="string">"dev1.deviceId"</span> <span class="attr">:href</span>=<span class="string">"dev1.url"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">h5</span> <span class="attr">style</span>=<span class="string">"text-align: center"</span>&gt;</span>&#123;&#123;dev1.name&#125;&#125;<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"img-vue-for"</span> <span class="attr">:src</span>=<span class="string">dev1.img</span> <span class="attr">:alt</span>=<span class="string">"dev1.name"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/front-skills.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/front-end/front-skills.html" itemprop="url">前端开发技巧总结</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T20:08:14+08:00">2017-03-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>两个class对调，适用于折叠按钮加号/减号切换的情况</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).toggleClass(<span class="string">'fa-minus'</span>).addClass(<span class="string">'fa-plus'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>文字在div中垂直居中</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">style</span>=<span class="string">"height:100%;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">"vertical-align:middle;"</span>&gt;</span>文字内容<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>vue表单ajax提交</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> @<span class="attr">submit.prevent</span>=<span class="string">"saveData"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在 <code>from</code> 标签上使用 <code>@submit</code>，配合 <code>.prevent</code> 可以阻止原生submit事件，从而在方法中使用ajax提交。</p>
+<p><strong>关于同一个页面多个$(function())的问题</strong></p>
+<p>经测试 <code>chrome</code> 和 <code>ie11</code> 都会正确执行多个 <code>$(function())</code> 的内容，而 firefox 却不能执行。所以为防止出现问题，请确保一个页面中只有一个。</p>
+<p><strong>ajax缓存问题</strong></p>
+<p><code>chrome</code> 和 <code>firefox</code> 刷新时会自动不使用ajax缓存的内容，而 <code>ie11</code> 则会取缓存内容。其缓存机制是：如果再次请求的url跟之前的完全相同，则ie会从浏览器缓存中直接取出数据。所以在开发中要么在url中增加 <code>new Date()</code>时间戳，要么在ajax请求中增加一项配置：<code>cache: false</code>。</p>
+<p><strong>防止页面被其他iframe嵌入</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>!=top) <span class="comment">// 判断当前的window对象是否是top对象</span></span><br><span class="line">        top.location.href =<span class="built_in">window</span>.location.href; <span class="comment">// 如果不是，将top对象的网址自动导向被嵌入网页的网址</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>只要将它放入网页源码的头部，那些流氓就没有办法使用你的网页了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/photo/camera-properties.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/photo/camera-properties.html" itemprop="url">相机参数详解</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T23:47:36+08:00">2017-03-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/photo/" itemprop="url" rel="index"><span itemprop="name">photo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="光圈"><a href="#光圈" class="headerlink" title="光圈"></a>光圈</h2><h3 id="特性一：控制进光量"><a href="#特性一：控制进光量" class="headerlink" title="特性一：控制进光量"></a>特性一：控制进光量</h3><p>光圈的数值越小，光圈孔径越大，进光量越多，画面也就越明亮。</p>
+<p>光圈的数值越大，光圈孔径越小，进光量越少，画面也就越灰暗。</p>
+<p><img src="http://2c.zol-img.com.cn/product/68_500x2000/116/ceu3k4UUJ6aN.jpg" alt="guangquan"></p>
+<h3 id="特性二：控制景深"><a href="#特性二：控制景深" class="headerlink" title="特性二：控制景深"></a>特性二：控制景深</h3><p>光圈的数值越小，光圈孔径越大，景深越浅，背景虚化越明显。</p>
+<p>光圈的数值越大，光圈孔径越小，景深越深，背景虚化越不明显。</p>
+<p><img src="http://2d.zol-img.com.cn/product/68_500x2000/123/ceR7IjGHm7CmI.jpg" alt="jingshen"></p>
+<p>建议在拍摄风景的时候尽量使用<strong>F8</strong>、<strong>F11</strong>这样的小光圈拍摄，这样拍出来的风景照片远近都是清楚的。</p>
+<p>而在拍摄人像的时候可以选择<strong>F4</strong>、<strong>F2</strong>这样的大光圈拍摄，大光圈可以很好的虚化背景来突出主体人物。</p>
+<h2 id="快门"><a href="#快门" class="headerlink" title="快门"></a>快门</h2><h3 id="特性一：控制进光量-1"><a href="#特性一：控制进光量-1" class="headerlink" title="特性一：控制进光量"></a>特性一：控制进光量</h3><p>快门速度为“秒”，常见速度有：1, 1/2, 1/8, 1/15, 1/30, 1/60, 1/125, 1/250, 1/500, 1/1000, 1/2000等。相邻两级快门速度的曝光量相差一倍。</p>
+<p>一般来说人手持相机拍摄时快门速度不能低于1/30秒，不然很容易因为抖动而拍虚。</p>
+<p>快门速度越快，光线通过时间越短，画面越暗。</p>
+<p>快门速度越慢，光线通过时间越长，画面越亮。</p>
+<h3 id="特性二：不同的拍摄效果"><a href="#特性二：不同的拍摄效果" class="headerlink" title="特性二：不同的拍摄效果"></a>特性二：不同的拍摄效果</h3><p>高速快门一般用于拍摄高速运动的物体、转瞬即逝的画面。<br>低速快门可以拍摄出过程美，比如夜晚的车水马龙。</p>
+<p>快门速度越快，越能抓拍瞬间，表现瞬间美。</p>
+<p>快门速度越慢，越能捕捉过程，表现过程美。</p>
+<h2 id="光圈和快门合理利用"><a href="#光圈和快门合理利用" class="headerlink" title="光圈和快门合理利用"></a>光圈和快门合理利用</h2><p>相机拨盘上有A档（光圈优先）和S档（快门优先）。</p>
+<p>A档模式下，可以通过改变光圈的大小来控制景深，相机会保证曝光量的前提下自动围棋匹配合适的快门速度。A档的优势是使用者只需关心拍摄的景深，而不用过度考虑快门速度。</p>
+<p>S档模式下，可以大概选定一个快门速度，相机会自动调节光圈大小，这样可以保证在拍摄高速运动的物体时拥有稳定的快门速度，而不会拍糊。行人1/125足够，下落的水滴要1/1000速度。</p>
+<p>总结：<br><strong>光圈</strong>：光圈的数值越小，光圈孔径越大，进光量越多，画面就越明亮，景深越浅。光圈的数值越大，光圈孔径越小，进光量越少，画面就越灰暗，景深越深。</p>
+<p><strong>快门</strong>：快门速度越快，光线通过时间越短，画面越暗，越能抓拍瞬间。快门速度越慢，光线通过时间越长，画面越亮，越能表现过程</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/photo/miephoto-01.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/photo/miephoto-01.html" itemprop="url">咩学摄影 之 构图</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T20:37:50+08:00">2017-02-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/photo/" itemprop="url" rel="index"><span itemprop="name">photo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>构图是一张作品的骨架，有了好的构图思路，精彩的作品就能顺手拈来，轻而易举。</p>
+</blockquote>
+<h2 id="对角线构图"><a href="#对角线构图" class="headerlink" title="对角线构图"></a>对角线构图</h2><p>对角线构图是指物体在画幅中两对角的连线，是一种导向性很强的构图形式。</p>
+<p>其优点是富于动感，显得活泼，容易产生线条的汇聚趋势，具有纵向感，吸引人的视线并突出主题。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/photo/miephoto-01.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/ajax-load-page-content.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/front-end/ajax-load-page-content.html" itemprop="url">使用Ajax实现页面局部刷新</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T10:16:34+08:00">2017-02-24</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>起因是在做前端页面时，左侧的菜单栏采用手风琴样式，点击菜单打开新页面刷新后，菜单的状态不能保存，新页面或刷新后，菜单会还原到初始阶段，并且这种方式，每次刷新或加载页面都会重新加载一遍菜单，导致不必要的资源浪费。</p>
+<p>所以开始阶段有思考几种解决方案：</p>
+<ol>
+<li>使用<code>&lt;iframe&gt;</code>标签隔离父-子页面，导航菜单栏放在主体父页面中，菜单链接的页面在iframe子页面中加载。但是iframe会带来安全问题、拖累页面加载速度等，初步将此项排除。</li>
+<li>保存导航菜单每次点击前的状态到<code>cookie</code>中，当刷新或加载新页面时从cookie中读取状态。此种方式需要在每次页面加载操作时都执行js对应方法保存或读取cookie信息，很繁琐。</li>
+<li><code>Ajax</code>方式实现局部刷新，只需调用jquery的<code>.load()</code>方法即可。此种方式是加载远程页面内容到指定的div中，而页面其他部分并不刷新。<br>点击<a href="http://api.jquery.com/load/" target="_blank" rel="noopener">查看文档</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$( <span class="string">"#result"</span> ).load( <span class="string">"ajax/test.html"</span> );</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/Note/prints-liujinping.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/Note/prints-liujinping.html" itemprop="url">刘金平版画展 - 嘉木美术馆</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-22T11:29:08+08:00">2017-02-22</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <span itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><img itemprop="url image" src="http://swroom.qiniudn.com/banyu.jpg" class="full-image" alt="banyu" title="版语"><meta itemprop="width" content="auto"><meta itemprop="height" content="auto"></span>
+<p>昨日与朋友一行三人去了嘉木美术馆，参观了刘金平先生的版画展。</p>
+<p>嘉木是全国唯一365天开馆的美术馆，从湖南路老舍公园西侧小路北上不远，在一座浓郁老城区风格的二层小楼里转手便是，其馆面积并不很大，但初入其中却感温馨。展室有上下两层，顺着红色木质旋转回廊而上即可到达二层。</p>
+<p>本期主题是刘金平先生的版画，2月19日开展，持续到3月4日。前些日子是在朋友圈看到从此画展的消息，其中一张描绘青岛初秋的作品吸引了我，恰逢周末，遂决定约了朋友一起前来，我们当日启程时已略晚，但有幸在闭馆前抵达。</p>
+<p>兜兜转转看到最后的一幅作品就是此图，其实它就摆放在二层展室门口旁边的位置，恰巧却是从另一侧转了一圈回到门口时发现的。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/Note/prints-liujinping.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/vue-guide.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/front-end/vue-guide.html" itemprop="url">Vue.js 基础</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T08:56:17+08:00">2017-02-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p><a href="https://vuejs.bootcss.com/v2/guide/installation.html" target="_blank" rel="noopener"><strong>Vue.js 2.0 文档</strong></a></p>
+</blockquote>
+<h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><h3 id="插值（数据绑定）"><a href="#插值（数据绑定）" class="headerlink" title="插值（数据绑定）"></a>插值（数据绑定）</h3><h4 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h4><p>数据绑定的最常见形式，就是使用“Mustache”语法（双大括号）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>此时<code>msg</code>的值有变化，插值处的内容就会被更新，文本模式还可用<code>v-text</code>来绑定文本值：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-text</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>除此之外，可以使用<code>v-once</code>指令，实现一次性插值，数据改变时不再更新内容，但是要注意会影响该标签内的所有数据绑定：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-once</span>&gt;</span>This will never change: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<code>v-modal</code>来进行数据的双向绑定：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"message"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当input的值变化是，message显示的内容也会变，反过来如果message的值变化，input框内的内容也会随之改变。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/front-end/vue-guide.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -734,6 +1846,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -778,7 +1894,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">68</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -793,7 +1909,27 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -814,7 +1950,71 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="java,framework,spring," />
+
+
+<meta name="description" content="AOP底层本质一段代码揭示AOP编程的本质：使用“代理模式”将不同层“织入”在一起，而使得各层的代码干净。123456789101112131415161718192021@Testpublic void test () &amp;#123;    final ISomeService service = new SomeServiceImpl();    //使用动态代理将底层服务（SomeUtil）和">
+<meta name="keywords" content="java,framework,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Notes：5_AOP编程">
+<meta property="og:url" content="http://ihave.news/post/java-framework/SpringNotes5AOP.html">
+<meta property="og:site_name" content="iHave.News">
+<meta property="og:description" content="AOP底层本质一段代码揭示AOP编程的本质：使用“代理模式”将不同层“织入”在一起，而使得各层的代码干净。123456789101112131415161718192021@Testpublic void test () &amp;#123;    final ISomeService service = new SomeServiceImpl();    //使用动态代理将底层服务（SomeUtil）和">
+<meta property="og:updated_time" content="2018-02-09T06:04:20.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Notes：5_AOP编程">
+<meta name="twitter:description" content="AOP底层本质一段代码揭示AOP编程的本质：使用“代理模式”将不同层“织入”在一起，而使得各层的代码干净。123456789101112131415161718192021@Testpublic void test () &amp;#123;    final ISomeService service = new SomeServiceImpl();    //使用动态代理将底层服务（SomeUtil）和">
+
+
+
+
+
+
+  <link rel="canonical" href="http://ihave.news/post/java-framework/SpringNotes5AOP.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>Spring Notes：5_AOP编程 | iHave.News</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iHave.News</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">I have news for you.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/java-framework/SpringNotes5AOP.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Spring Notes：5_AOP编程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-14T11:10:27+08:00">2016-05-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java-framework/" itemprop="url" rel="index"><span itemprop="name">java-framework</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="AOP底层本质"><a href="#AOP底层本质" class="headerlink" title="AOP底层本质"></a>AOP底层本质</h2><p>一段代码揭示AOP编程的本质：使用“代理模式”将不同层“织入”在一起，而使得各层的代码干净。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ISomeService service = <span class="keyword">new</span> SomeServiceImpl();</span><br><span class="line">    <span class="comment">//使用动态代理将底层服务（SomeUtil）和业务层（ISomeService）织入到一起</span></span><br><span class="line">    ISomeService proxy = (ISomeService) Proxy.newProxyInstance(</span><br><span class="line">            service.getClass().getClassLoader(),</span><br><span class="line">            service.getClass().getInterfaces(),</span><br><span class="line">            <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                    SomeUtil.doTransaction();</span><br><span class="line">                    Object result = method.invoke(service, args);</span><br><span class="line">                    SomeUtil.doLog();</span><br><span class="line">                    <span class="keyword">return</span> result;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">// 使用增强后的代理类执行方法</span></span><br><span class="line">    proxy.doSome();</span><br><span class="line">    proxy.doSecond();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="AOP环境配置"><a href="#AOP环境配置" class="headerlink" title="AOP环境配置"></a>AOP环境配置</h2><ol>
+<li>jar包有两个：<strong>spring-aop-4.2.5.RELEASE.jar</strong> 和 <strong>aopalliance-1.0.jar</strong></li>
+<li>xml约束：使用默认spring约束即可。</li>
+</ol>
+<a id="more"></a>
+<h2 id="AOP的几个概念"><a href="#AOP的几个概念" class="headerlink" title="AOP的几个概念"></a>AOP的几个概念</h2><ol>
+<li><strong>切面（Aspect）</strong><br>泛指交叉业务逻辑，例如事务、日志等。常用切面有通知和顾问。实际就是对业务逻辑的一种增强。</li>
+<li><strong>织入（Weaving）</strong><br>织入就是将切面代码插入到目标对象的过程。</li>
+<li><strong>连接点（JoinPoint）</strong><br>一般来说业务接口中的方法为连接点。</li>
+<li><strong>切入点（PointCut）</strong><br>切入点指切面具体织入的方法。同一个接口中可能只有某个方法需要增强，那么这个方法就是切入点。<br><code>final</code>的方法<strong>不</strong>能作为连接点和切入点。因为final不能被修改，不能被增强。</li>
+<li><strong>目标对象（Target）</strong><br>目标对象指的就是将要被增强的对象。</li>
+<li><strong>通知（Advice）</strong><br>通知是切面的一种简单实现方式。它定义了增强代码切入到目标代码的<strong>时间点</strong>。<br><strong>切入点定义切入位置，通知定义切入时间。</strong></li>
+<li><strong>顾问（Advisor）</strong><br>顾问能将通知以更复杂的方式织入到目标对象中。</li>
+</ol>
+<h2 id="通知（Advice）"><a href="#通知（Advice）" class="headerlink" title="通知（Advice）"></a>通知（Advice）</h2><h3 id="前置通知（MethodBeforeAdvice）"><a href="#前置通知（MethodBeforeAdvice）" class="headerlink" title="前置通知（MethodBeforeAdvice）"></a>前置通知（MethodBeforeAdvice）</h3><ol>
+<li><p>定义前置通知类，实现接口<code>MethodBeforeAdvice</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMethodBeforeAdvice</span> <span class="keyword">implements</span> <span class="title">MethodBeforeAdvice</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(Method method, Object[] objects, Object o)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目标方法执行之前：对目标对象的增强代码就是写在这里的。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用xml配置文件织入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someService"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop1.SomeServiceImpl"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--切面：前置通知--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beforeAdvice"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop1.MyMethodBeforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"someService"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--可以不写该接口，因为默认自动检测到目标类所实现的所有接口--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interfaces"</span> <span class="attr">value</span>=<span class="string">"com.swroom.aop1.ISomeService"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"beforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注：property属性中可以不定义interfaces接口，因为默认自动检测目标类所实现的所有接口。</p>
+<h3 id="后置通知（AfterReturningAdvice）"><a href="#后置通知（AfterReturningAdvice）" class="headerlink" title="后置通知（AfterReturningAdvice）"></a>后置通知（AfterReturningAdvice）</h3><ol>
+<li><p>定义后置通知类，实现接口<code>AfterReturningAdvice</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAfterReturningAdvice</span> <span class="keyword">implements</span> <span class="title">AfterReturningAdvice</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 后置通知接口的方法，比前置通知多了一个返回值参数，并且只是一个单纯的返回值，无法对其进行处理。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">(Object returnValue, Method method, Object[] args, Object target)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行方法之后"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用xml配置文件织入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someService"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop2.SomeServiceImpl"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--切面：后置通知--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterReturning"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop2.MyAfterReturningAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"someService"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"afterReturning"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="环绕通知（MethodInterceptor）"><a href="#环绕通知（MethodInterceptor）" class="headerlink" title="环绕通知（MethodInterceptor）"></a>环绕通知（MethodInterceptor）</h3><ol>
+<li><p>定义环绕通知类，实现接口<code>MethodInterceptor</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMethodInterceptor</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="comment">// invoke方法的返回值就是目标方法的返回值。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(MethodInvocation methodInvocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目标方法执行之前"</span>);</span><br><span class="line">        <span class="comment">// 执行目标方法</span></span><br><span class="line">        Object result = methodInvocation.proceed();</span><br><span class="line">        System.out.println(<span class="string">"目标方法执行之后"</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用xml配置文件织入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someService"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop3.SomeServiceImpl"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--切面：环绕通知通知--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"aroundAdvice"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop3.MyMethodInterceptor"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"someService"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"aroundAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="异常通知（ThrowsAdvice）"><a href="#异常通知（ThrowsAdvice）" class="headerlink" title="异常通知（ThrowsAdvice）"></a>异常通知（ThrowsAdvice）</h3><ol>
+<li>顾名思义，当获取相应的异常时，触发该异常通知增强。</li>
+<li>可自定义异常。</li>
+<li><p>编写异常通知类，实现接口<code>ThrowsAdvice</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThrowsAdvice</span> <span class="keyword">implements</span> <span class="title">ThrowsAdvice</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">(UsernameException ex)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"若发生UsernameException，该方法会自动调用执行！ex="</span> + ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">(PasswordException ex)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"若发生PasswordException，该方法会自动调用执行！ex="</span> + ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用xml织入代码</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someService"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop4.SomeServiceImpl"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--切面：异常通知--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"throwsAdvice"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop4.MyThrowsAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"someService"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"throwsAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="顾问"><a href="#顾问" class="headerlink" title="顾问"></a>顾问</h2><p>目标对象和切面都不需要动，只修改xml配置文件，即可使用顾问。可将切面匹配切入点增强。</p>
+<h3 id="名称匹配方法切入点顾问（NameMatchMethodPointcutAdvisor）"><a href="#名称匹配方法切入点顾问（NameMatchMethodPointcutAdvisor）" class="headerlink" title="名称匹配方法切入点顾问（NameMatchMethodPointcutAdvisor）"></a>名称匹配方法切入点顾问（NameMatchMethodPointcutAdvisor）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someService"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop5.SomeServiceImpl"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--切面：后置通知--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterAdvice"</span> <span class="attr">class</span>=<span class="string">"com.swroom.aop5.MyAfterReturningAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--切面：顾问 指定切入点--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.NameMatchMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"afterAdvice"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappedName"</span> <span class="attr">value</span>=<span class="string">"doSome"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"someService"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"afterAdvisor"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注：多留意应该使用<code>ref</code>的地方，不要用成了value。</p>
+<p>如果需要多个切入点，可针对顾问定义修改如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--切面：顾问 指定切入点--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.NameMatchMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"afterAdvice"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappedNames"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>doSome<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>doThird<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>或者直接使用更简便的方法：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.NameMatchMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"afterAdvice"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappedNames"</span> <span class="attr">value</span>=<span class="string">"doSome,doThird"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>支持通配符：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.NameMatchMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"afterAdvice"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappedNames"</span> <span class="attr">value</span>=<span class="string">"do*"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="正则表达式方法切入点顾问（RegexpMethodPointcutAdvisor）"><a href="#正则表达式方法切入点顾问（RegexpMethodPointcutAdvisor）" class="headerlink" title="正则表达式方法切入点顾问（RegexpMethodPointcutAdvisor）"></a>正则表达式方法切入点顾问（RegexpMethodPointcutAdvisor）</h3><p>正则表达式匹配的对象是<strong>全限定性</strong>方法名，而不仅仅是简单方法名。即会从包名、类名、方法名都搜索一遍。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"afterAdvisor"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.RegexpMethodPointcutAdvisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"afterAdvice"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--正则表达式匹配的对象为：全限定性方法名，而不仅仅是简单方法名--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;property name="pattern" value=".*T.*"/&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;property name="pattern" value=".*Sec.*"/&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"pattern"</span> <span class="attr">value</span>=<span class="string">".*T.*|.*Sec.*"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注：平常在使用正则表达式顾问时，一般不会使用<code>patterns</code>，而是使用<code>pattern</code>配合正则表达式的或（|）运算符。</p>
+<h2 id="自动代理生成器"><a href="#自动代理生成器" class="headerlink" title="自动代理生成器"></a>自动代理生成器</h2><p>上述两种顾问方式存在两个缺陷：</p>
+<ol>
+<li>当有多个对象需要顾问增强时，需要书写多遍代理，代码冗余。</li>
+<li>当<code>ac.getBean(&quot;proxyName&quot;)</code>时，只是一种迫不得已的使用代理名称，而不是目标对象的名称。</li>
+</ol>
+<p>为了解决上述缺陷，引入自动代理生成器。有两种：默认和Bean名称</p>
+<h3 id="默认Advisor自动代理生成器（DefaultAdvisorAutoProxyCreator）"><a href="#默认Advisor自动代理生成器（DefaultAdvisorAutoProxyCreator）" class="headerlink" title="默认Advisor自动代理生成器（DefaultAdvisorAutoProxyCreator）"></a>默认Advisor自动代理生成器（DefaultAdvisorAutoProxyCreator）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--默认Advisor自动代理生成器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果使用自动代理服务器，则此处getBean使用目标对象的id即可</span></span><br><span class="line">ISomeService service = (ISomeService) ac.getBean(<span class="string">"someService"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Bean名称自动代理生成器（BeanNameAutoProxyCreator）"><a href="#Bean名称自动代理生成器（BeanNameAutoProxyCreator）" class="headerlink" title="Bean名称自动代理生成器（BeanNameAutoProxyCreator）"></a>Bean名称自动代理生成器（BeanNameAutoProxyCreator）</h3><p>默认自动代理生成器也有一个缺陷：无法指定要增强的目标对象，默认是所有对象都增强。<br>为解决这一问题引入了Bean名称自动代理生成器。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--Bean名称自动代理生成器，不仅可以指定目标对象，还可以指定切面--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"serviceProxy"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"beanNames"</span> <span class="attr">value</span>=<span class="string">"someService1"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"beforeAdvice"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="动态代理探究"><a href="#动态代理探究" class="headerlink" title="动态代理探究"></a>动态代理探究</h2><h3 id="JDK动态代理和CGLIB代理生成的区别"><a href="#JDK动态代理和CGLIB代理生成的区别" class="headerlink" title="JDK动态代理和CGLIB代理生成的区别"></a>JDK动态代理和CGLIB代理生成的区别</h3><p>JDK动态代理只能对实现了接口的类生成代理，而不能针对类 。<br>CGLIB是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法 。所以方法不能是final的。</p>
+<p>默认的策略是如果目标类是<code>接口</code>，则使用<code>JDK</code>动态代理技术，如果目标对象没有实现接口，则默认会采用<code>CGLIB</code>代理。</p>
+<p>如果目标对象实现了接口，可以强制使用CGLIB实现代理（添加CGLIB库，并在spring配置中加入<code>&lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;</code>）。</p>
+<p>可参见：<a href="http://www.cnblogs.com/binyue/p/4519652.html" target="_blank" rel="noopener">JDK和CGLIB生成动态代理类的区别</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/framework/" rel="tag"># framework</a>
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/java-framework/SpringNotes4Annotation.html" rel="next" title="Spring Notes：4_Annotation">
+                <i class="fa fa-chevron-left"></i> Spring Notes：4_Annotation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/java-framework/SpringNotes6AspectJ.html" rel="prev" title="Spring Notes：6_AspectJ对AOP的实现">
+                Spring Notes：6_AspectJ对AOP的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Tsunglei Ching" />
+            
+              <p class="site-author-name" itemprop="name">Tsunglei Ching</p>
+              <p class="site-description motion-element" itemprop="description">Read more, write better.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/raykr" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ray@boyamarine.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/uisecret" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/jing-yun-53-6/activities" target="_blank" title="Zhihu" rel="external nofollow"><i class="fa fa-fw fa-leaf"></i>Zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP底层本质"><span class="nav-number">1.</span> <span class="nav-text">AOP底层本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP环境配置"><span class="nav-number">2.</span> <span class="nav-text">AOP环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP的几个概念"><span class="nav-number">3.</span> <span class="nav-text">AOP的几个概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通知（Advice）"><span class="nav-number">4.</span> <span class="nav-text">通知（Advice）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前置通知（MethodBeforeAdvice）"><span class="nav-number">4.1.</span> <span class="nav-text">前置通知（MethodBeforeAdvice）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后置通知（AfterReturningAdvice）"><span class="nav-number">4.2.</span> <span class="nav-text">后置通知（AfterReturningAdvice）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环绕通知（MethodInterceptor）"><span class="nav-number">4.3.</span> <span class="nav-text">环绕通知（MethodInterceptor）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常通知（ThrowsAdvice）"><span class="nav-number">4.4.</span> <span class="nav-text">异常通知（ThrowsAdvice）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顾问"><span class="nav-number">5.</span> <span class="nav-text">顾问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名称匹配方法切入点顾问（NameMatchMethodPointcutAdvisor）"><span class="nav-number">5.1.</span> <span class="nav-text">名称匹配方法切入点顾问（NameMatchMethodPointcutAdvisor）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式方法切入点顾问（RegexpMethodPointcutAdvisor）"><span class="nav-number">5.2.</span> <span class="nav-text">正则表达式方法切入点顾问（RegexpMethodPointcutAdvisor）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动代理生成器"><span class="nav-number">6.</span> <span class="nav-text">自动代理生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认Advisor自动代理生成器（DefaultAdvisorAutoProxyCreator）"><span class="nav-number">6.1.</span> <span class="nav-text">默认Advisor自动代理生成器（DefaultAdvisorAutoProxyCreator）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean名称自动代理生成器（BeanNameAutoProxyCreator）"><span class="nav-number">6.2.</span> <span class="nav-text">Bean名称自动代理生成器（BeanNameAutoProxyCreator）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态代理探究"><span class="nav-number">7.</span> <span class="nav-text">动态代理探究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK动态代理和CGLIB代理生成的区别"><span class="nav-number">7.1.</span> <span class="nav-text">JDK动态代理和CGLIB代理生成的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tsunglei Ching</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
