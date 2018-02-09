@@ -138,28 +138,28 @@
 
 
   
-  <meta name="keywords" content="bug," />
+  <meta name="keywords" content="ubuntu,linux," />
 
 
-<meta name="description" content="如下的语句：1select to_date(‘2003,May-22′,’YYYY,Mon-dd’) from dual; 遇到ORA-01843:not a valid month的错误，根据搜索，知道是nls_date_language这个参数引起的问题，在nls_date_language参数设置为 AMERICAN的时候，是可以显示英文月份的，所以查看nls_date_language这个">
-<meta name="keywords" content="bug">
+<meta name="description" content="调整鼠标灵敏度1sudo xset mouse 1.5 状态栏添加网络流量监控1234sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor  sudo apt-get update  sudo apt-get install indicator-sysmonitor  indicator-sysmonitor &amp;amp; 然后，可">
+<meta name="keywords" content="ubuntu,linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ORA-01843:not a valid month">
-<meta property="og:url" content="http://ihave.news/post/oracle/ORA-01843.html">
+<meta property="og:title" content="Ubuntu 16.04 安装完成后的优化配置">
+<meta property="og:url" content="http://ihave.news/post/knowledge-repo/ubuntu-16-04-config.html">
 <meta property="og:site_name" content="iHave.News">
-<meta property="og:description" content="如下的语句：1select to_date(‘2003,May-22′,’YYYY,Mon-dd’) from dual; 遇到ORA-01843:not a valid month的错误，根据搜索，知道是nls_date_language这个参数引起的问题，在nls_date_language参数设置为 AMERICAN的时候，是可以显示英文月份的，所以查看nls_date_language这个">
+<meta property="og:description" content="调整鼠标灵敏度1sudo xset mouse 1.5 状态栏添加网络流量监控1234sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor  sudo apt-get update  sudo apt-get install indicator-sysmonitor  indicator-sysmonitor &amp;amp; 然后，可">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-09T06:04:20.228Z">
+<meta property="og:updated_time" content="2018-02-09T13:52:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ORA-01843:not a valid month">
-<meta name="twitter:description" content="如下的语句：1select to_date(‘2003,May-22′,’YYYY,Mon-dd’) from dual; 遇到ORA-01843:not a valid month的错误，根据搜索，知道是nls_date_language这个参数引起的问题，在nls_date_language参数设置为 AMERICAN的时候，是可以显示英文月份的，所以查看nls_date_language这个">
+<meta name="twitter:title" content="Ubuntu 16.04 安装完成后的优化配置">
+<meta name="twitter:description" content="调整鼠标灵敏度1sudo xset mouse 1.5 状态栏添加网络流量监控1234sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor  sudo apt-get update  sudo apt-get install indicator-sysmonitor  indicator-sysmonitor &amp;amp; 然后，可">
 
 
 
 
 
 
-  <link rel="canonical" href="http://ihave.news/post/oracle/ORA-01843.html"/>
+  <link rel="canonical" href="http://ihave.news/post/knowledge-repo/ubuntu-16-04-config.html"/>
 
 
 
@@ -168,7 +168,7 @@
     sidebar: "",
   };
 </script>
-  <title>ORA-01843:not a valid month | iHave.News</title>
+  <title>Ubuntu 16.04 安装完成后的优化配置 | iHave.News</title>
   
 
 
@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/oracle/ORA-01843.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/knowledge-repo/ubuntu-16-04-config.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -338,7 +338,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ORA-01843:not a valid month</h2>
+          <h2 class="post-title" itemprop="name headline">Ubuntu 16.04 安装完成后的优化配置</h2>
         
 
         <div class="post-meta">
@@ -350,7 +350,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-16T10:08:32+08:00">2017-01-16</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T21:49:59+08:00">2018-02-09</time>
             
 
             
@@ -371,7 +371,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge-repo</span></a></span>
 
                 
                 
@@ -405,15 +405,28 @@
       
 
       
-        <p>如下的语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select to_date(‘2003,May-22′,’YYYY,Mon-dd’) from dual;</span><br></pre></td></tr></table></figure></p>
-<p>遇到ORA-01843:not a valid month的错误，根据搜索，知道是<code>nls_date_language</code>这个参数引起的问题，在nls_date_language参数设置为 AMERICAN的时候，是可以显示英文月份的，所以查看nls_date_language这个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; show parameter nls_date_language;</span><br><span class="line"></span><br><span class="line">NAME                                 TYPE        VALUE</span><br><span class="line">———————————— ———– ——————————</span><br><span class="line">nls_date_language                    string</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>没有设置，是默认值，参看文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Property	Description</span><br><span class="line">Parameter type	String</span><br><span class="line">Syntax	</span><br><span class="line">NLS_DATE_LANGUAGE =</span><br><span class="line"> </span><br><span class="line">language</span><br><span class="line">Default value	Derived from </span><br><span class="line">NLS_LANGUAGE</span><br><span class="line">Modifiable	</span><br><span class="line">ALTER SESSION</span><br><span class="line">Range of values	Any valid </span><br><span class="line">NLS_LANGUAGE</span><br><span class="line"> value</span><br></pre></td></tr></table></figure></p>
-<p>默认值从NLS_LANGUAGE继承，而NLS_LANGUAGE为AMERICAN：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;  show parameter nls_language;</span><br><span class="line"></span><br><span class="line">NAME                                 TYPE        VALUE</span><br><span class="line">———————————— ———– ——————————</span><br><span class="line">nls_language                         string      AMERICAN</span><br></pre></td></tr></table></figure></p>
-<p>那为什么不能识别英文月份呢？</p>
-<p>再查看会话级的参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; run</span><br><span class="line">  1* select * from nls_session_parameters where parameter=’NLS_DATE_LANGUAGE’</span><br><span class="line"></span><br><span class="line">PARAMETER          VALUE</span><br><span class="line">—————— ——————</span><br><span class="line">NLS_DATE_LANGUAGE  SIMPLIFIED CHINESE</span><br></pre></td></tr></table></figure></p>
-<p>会话级的NLS_DATE_LANGUAGE设置为简体中文</p>
-<p>所以解决此问题的方法也很简单，只要在会话前指定会话的NLS_DATE_LANGUAGE参数即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter session set nls_date_language=’AMERICAN’;</span><br></pre></td></tr></table></figure></p>
+        <h3 id="调整鼠标灵敏度"><a href="#调整鼠标灵敏度" class="headerlink" title="调整鼠标灵敏度"></a>调整鼠标灵敏度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xset mouse 1.5</span><br></pre></td></tr></table></figure>
+<h3 id="状态栏添加网络流量监控"><a href="#状态栏添加网络流量监控" class="headerlink" title="状态栏添加网络流量监控"></a>状态栏添加网络流量监控</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor  </span><br><span class="line">sudo apt-get update  </span><br><span class="line">sudo apt-get install indicator-sysmonitor  </span><br><span class="line">indicator-sysmonitor &amp;</span><br></pre></td></tr></table></figure>
+<p>然后，可以配置开机启动，并且修改显示项。</p>
+<h3 id="ubuntu-16-04-配置环境变量，以jdk举例说明"><a href="#ubuntu-16-04-配置环境变量，以jdk举例说明" class="headerlink" title="ubuntu 16.04 配置环境变量，以jdk举例说明"></a>ubuntu 16.04 配置环境变量，以jdk举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/environment</span><br></pre></td></tr></table></figure>
+<p>文件末尾添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$JAVA_HOME/bin&quot;</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">export JAVA_HOME=/java/jdk1.8.0_121</span><br></pre></td></tr></table></figure></p>
+<p>保存后使环境变量生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/environment</span><br></pre></td></tr></table></figure></p>
+<p>还没完，现在的问题是如果重启电脑则会失效，还需要更改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>文件末尾添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#set Java environment</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/dengyang/jdk1.8.0_56</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<p>使设置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+<h3 id="安装Rime中文输入法"><a href="#安装Rime中文输入法" class="headerlink" title="安装Rime中文输入法"></a>安装Rime中文输入法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ibus-rime</span><br></pre></td></tr></table></figure>
+<p>重启输入法搜索rime添加即可。</p>
+<h3 id="安装主题管理器"><a href="#安装主题管理器" class="headerlink" title="安装主题管理器"></a>安装主题管理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gnome-tweak-tool unity-tweak-tool</span><br></pre></td></tr></table></figure>
+<h3 id="搞定更新中断被锁的问题"><a href="#搞定更新中断被锁的问题" class="headerlink" title="搞定更新中断被锁的问题"></a>搞定更新中断被锁的问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br></pre></td></tr></table></figure>
+<h3 id="安装快速启动软件Albert"><a href="#安装快速启动软件Albert" class="headerlink" title="安装快速启动软件Albert"></a>安装快速启动软件Albert</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard/webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br></pre></td></tr></table></figure>
+<h3 id="安装本地wiki软件Zim"><a href="#安装本地wiki软件Zim" class="headerlink" title="安装本地wiki软件Zim"></a>安装本地wiki软件Zim</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zim</span><br></pre></td></tr></table></figure>
+<h3 id="修復一直卡在登錄頁面死循環的問題"><a href="#修復一直卡在登錄頁面死循環的問題" class="headerlink" title="修復一直卡在登錄頁面死循環的問題"></a>修復一直卡在登錄頁面死循環的問題</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + Alt + F1 登錄</span><br><span class="line">/usr/bin/sudo vim /etc/profile 刪除掉會引發異常的部分</span><br><span class="line">/usr/bin/sudo /sbin/reboot 重啓電腦</span><br></pre></td></tr></table></figure>
+<h3 id="创建快捷方式"><a href="#创建快捷方式" class="headerlink" title="创建快捷方式"></a>创建快捷方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">gedit xxx.desktop</span><br></pre></td></tr></table></figure>
+<h3 id="linux-使用微信，用electron套壳"><a href="#linux-使用微信，用electron套壳" class="headerlink" title="linux 使用微信，用electron套壳"></a>linux 使用微信，用electron套壳</h3><p><a href="https://github.com/geeeeeeeeek/electronic-wechat/releases" target="_blank" rel="noopener">https://github.com/geeeeeeeeek/electronic-wechat/releases</a></p>
+<h3 id="linux-使用ss代理"><a href="#linux-使用ss代理" class="headerlink" title="linux 使用ss代理"></a>linux 使用ss代理</h3><p>安装shadowsocks-qt5<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure></p>
+<p>配置代理服务器，无需多言<br>配置全局代理，需要使用genpac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-pip</span><br><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">sudo pip install genpac</span><br><span class="line">pip install --upgrade genpac</span><br><span class="line"></span><br><span class="line">genpac -p &quot;SOCKS5 127.0.0.1:1080&quot;  --gfwlist-url=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt --output=&quot;autoproxy.pac&quot;</span><br></pre></td></tr></table></figure></p>
+<p>点击：System settings &gt; Network &gt; Network Proxy，选择 Method 为 Automatic，设置 Configuration URL 为 autoproxy.pac 文件的路径，点击 Apply System Wide。<br>格式如：file:///home/tsunglei/autoproxy.pac</p>
 
       
     </div>
@@ -431,7 +444,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/bug/" rel="tag"># bug</a>
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -444,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/oracle/ORA-01045.html" rel="next" title="ORA-01045:user system lacks create session privilege; logon denied">
-                <i class="fa fa-chevron-left"></i> ORA-01045:user system lacks create session privilege; logon denied
+              <a href="/post/knowledge-repo/hexo-github-travis-blog.html" rel="next" title="使用Hexo+Github+TravisCI搭建自动发布的静态博客系统">
+                <i class="fa fa-chevron-left"></i> 使用Hexo+Github+TravisCI搭建自动发布的静态博客系统
               </a>
             
           </div>
@@ -453,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/experience/aliyun-esc-wordpress.html" rel="prev" title="阿里云ECS搭建Wordpress">
-                阿里云ECS搭建Wordpress <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -505,8 +516,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -701,6 +721,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#调整鼠标灵敏度"><span class="nav-number">1.</span> <span class="nav-text">调整鼠标灵敏度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态栏添加网络流量监控"><span class="nav-number">2.</span> <span class="nav-text">状态栏添加网络流量监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu-16-04-配置环境变量，以jdk举例说明"><span class="nav-number">3.</span> <span class="nav-text">ubuntu 16.04 配置环境变量，以jdk举例说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改root密码"><span class="nav-number">4.</span> <span class="nav-text">修改root密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Rime中文输入法"><span class="nav-number">5.</span> <span class="nav-text">安装Rime中文输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装主题管理器"><span class="nav-number">6.</span> <span class="nav-text">安装主题管理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搞定更新中断被锁的问题"><span class="nav-number">7.</span> <span class="nav-text">搞定更新中断被锁的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装快速启动软件Albert"><span class="nav-number">8.</span> <span class="nav-text">安装快速启动软件Albert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装本地wiki软件Zim"><span class="nav-number">9.</span> <span class="nav-text">安装本地wiki软件Zim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修復一直卡在登錄頁面死循環的問題"><span class="nav-number">10.</span> <span class="nav-text">修復一直卡在登錄頁面死循環的問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建快捷方式"><span class="nav-number">11.</span> <span class="nav-text">创建快捷方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-使用微信，用electron套壳"><span class="nav-number">12.</span> <span class="nav-text">linux 使用微信，用electron套壳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-使用ss代理"><span class="nav-number">13.</span> <span class="nav-text">linux 使用ss代理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

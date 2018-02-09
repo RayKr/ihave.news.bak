@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -148,6 +148,7 @@
 <meta property="og:url" content="http://ihave.news/index.html">
 <meta property="og:site_name" content="iHave.News">
 <meta property="og:description" content="Read more, write better.">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iHave.News">
 <meta name="twitter:description" content="Read more, write better.">
@@ -206,7 +207,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -252,31 +253,31 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
         </li>
       
         
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
         </li>
       
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
         </li>
       
 
@@ -304,6 +305,166 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/knowledge-repo/ubuntu-16-04-config.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/knowledge-repo/ubuntu-16-04-config.html" itemprop="url">Ubuntu 16.04 安装完成后的优化配置</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T21:49:59+08:00">2018-02-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge-repo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="调整鼠标灵敏度"><a href="#调整鼠标灵敏度" class="headerlink" title="调整鼠标灵敏度"></a>调整鼠标灵敏度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xset mouse 1.5</span><br></pre></td></tr></table></figure>
+<h3 id="状态栏添加网络流量监控"><a href="#状态栏添加网络流量监控" class="headerlink" title="状态栏添加网络流量监控"></a>状态栏添加网络流量监控</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor  </span><br><span class="line">sudo apt-get update  </span><br><span class="line">sudo apt-get install indicator-sysmonitor  </span><br><span class="line">indicator-sysmonitor &amp;</span><br></pre></td></tr></table></figure>
+<p>然后，可以配置开机启动，并且修改显示项。</p>
+<h3 id="ubuntu-16-04-配置环境变量，以jdk举例说明"><a href="#ubuntu-16-04-配置环境变量，以jdk举例说明" class="headerlink" title="ubuntu 16.04 配置环境变量，以jdk举例说明"></a>ubuntu 16.04 配置环境变量，以jdk举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/environment</span><br></pre></td></tr></table></figure>
+<p>文件末尾添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$JAVA_HOME/bin&quot;</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">export JAVA_HOME=/java/jdk1.8.0_121</span><br></pre></td></tr></table></figure></p>
+<p>保存后使环境变量生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/environment</span><br></pre></td></tr></table></figure></p>
+<p>还没完，现在的问题是如果重启电脑则会失效，还需要更改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>文件末尾添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#set Java environment</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/dengyang/jdk1.8.0_56</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<p>使设置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+<h3 id="安装Rime中文输入法"><a href="#安装Rime中文输入法" class="headerlink" title="安装Rime中文输入法"></a>安装Rime中文输入法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ibus-rime</span><br></pre></td></tr></table></figure>
+<p>重启输入法搜索rime添加即可。</p>
+<h3 id="安装主题管理器"><a href="#安装主题管理器" class="headerlink" title="安装主题管理器"></a>安装主题管理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gnome-tweak-tool unity-tweak-tool</span><br></pre></td></tr></table></figure>
+<h3 id="搞定更新中断被锁的问题"><a href="#搞定更新中断被锁的问题" class="headerlink" title="搞定更新中断被锁的问题"></a>搞定更新中断被锁的问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br></pre></td></tr></table></figure>
+<h3 id="安装快速启动软件Albert"><a href="#安装快速启动软件Albert" class="headerlink" title="安装快速启动软件Albert"></a>安装快速启动软件Albert</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard/webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br></pre></td></tr></table></figure>
+<h3 id="安装本地wiki软件Zim"><a href="#安装本地wiki软件Zim" class="headerlink" title="安装本地wiki软件Zim"></a>安装本地wiki软件Zim</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zim</span><br></pre></td></tr></table></figure>
+<h3 id="修復一直卡在登錄頁面死循環的問題"><a href="#修復一直卡在登錄頁面死循環的問題" class="headerlink" title="修復一直卡在登錄頁面死循環的問題"></a>修復一直卡在登錄頁面死循環的問題</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + Alt + F1 登錄</span><br><span class="line">/usr/bin/sudo vim /etc/profile 刪除掉會引發異常的部分</span><br><span class="line">/usr/bin/sudo /sbin/reboot 重啓電腦</span><br></pre></td></tr></table></figure>
+<h3 id="创建快捷方式"><a href="#创建快捷方式" class="headerlink" title="创建快捷方式"></a>创建快捷方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">gedit xxx.desktop</span><br></pre></td></tr></table></figure>
+<h3 id="linux-使用微信，用electron套壳"><a href="#linux-使用微信，用electron套壳" class="headerlink" title="linux 使用微信，用electron套壳"></a>linux 使用微信，用electron套壳</h3><p><a href="https://github.com/geeeeeeeeek/electronic-wechat/releases" target="_blank" rel="noopener">https://github.com/geeeeeeeeek/electronic-wechat/releases</a></p>
+<h3 id="linux-使用ss代理"><a href="#linux-使用ss代理" class="headerlink" title="linux 使用ss代理"></a>linux 使用ss代理</h3><p>安装shadowsocks-qt5<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure></p>
+<p>配置代理服务器，无需多言<br>配置全局代理，需要使用genpac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-pip</span><br><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">sudo pip install genpac</span><br><span class="line">pip install --upgrade genpac</span><br><span class="line"></span><br><span class="line">genpac -p &quot;SOCKS5 127.0.0.1:1080&quot;  --gfwlist-url=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt --output=&quot;autoproxy.pac&quot;</span><br></pre></td></tr></table></figure></p>
+<p>点击：System settings &gt; Network &gt; Network Proxy，选择 Method 为 Automatic，设置 Configuration URL 为 autoproxy.pac 文件的路径，点击 Apply System Wide。<br>格式如：file:///home/tsunglei/autoproxy.pac</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -349,9 +510,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-09T10:16:56+08:00">2018-02-09</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T10:16:56+08:00">2018-02-09</time>
             
 
             
@@ -369,7 +530,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge repo</span></a></span>
@@ -526,9 +687,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-24T09:25:06+08:00">2017-05-24</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T09:25:06+08:00">2017-05-24</time>
             
 
             
@@ -661,9 +822,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-11T14:34:59+08:00">2017-03-11</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T14:34:59+08:00">2017-03-11</time>
             
 
             
@@ -681,7 +842,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/music/" itemprop="url" rel="index"><span itemprop="name">music</span></a></span>
@@ -844,9 +1005,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T22:55:14+08:00">2017-03-07</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T22:55:14+08:00">2017-03-07</time>
             
 
             
@@ -864,7 +1025,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
@@ -991,9 +1152,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T20:08:14+08:00">2017-03-03</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T20:08:14+08:00">2017-03-03</time>
             
 
             
@@ -1011,7 +1172,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
@@ -1139,9 +1300,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T23:47:36+08:00">2017-03-02</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T23:47:36+08:00">2017-03-02</time>
             
 
             
@@ -1159,7 +1320,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/photo/" itemprop="url" rel="index"><span itemprop="name">photo</span></a></span>
@@ -1297,9 +1458,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T20:37:50+08:00">2017-02-27</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T20:37:50+08:00">2017-02-27</time>
             
 
             
@@ -1317,7 +1478,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/photo/" itemprop="url" rel="index"><span itemprop="name">photo</span></a></span>
@@ -1363,7 +1524,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/post/photo/miephoto-01.html#more" rel="contents">
-              Read more &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1444,9 +1605,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T10:16:34+08:00">2017-02-24</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T10:16:34+08:00">2017-02-24</time>
             
 
             
@@ -1464,7 +1625,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
@@ -1590,9 +1751,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-22T11:29:08+08:00">2017-02-22</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T11:29:08+08:00">2017-02-22</time>
             
 
             
@@ -1610,7 +1771,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a></span>
@@ -1656,157 +1817,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/post/Note/prints-liujinping.html#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/vue-guide.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/front-end/vue-guide.html" itemprop="url">Vue.js 基础</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T08:56:17+08:00">2017-02-15</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p><a href="https://vuejs.bootcss.com/v2/guide/installation.html" target="_blank" rel="noopener"><strong>Vue.js 2.0 文档</strong></a></p>
-</blockquote>
-<h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><h3 id="插值（数据绑定）"><a href="#插值（数据绑定）" class="headerlink" title="插值（数据绑定）"></a>插值（数据绑定）</h3><h4 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h4><p>数据绑定的最常见形式，就是使用“Mustache”语法（双大括号）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>此时<code>msg</code>的值有变化，插值处的内容就会被更新，文本模式还可用<code>v-text</code>来绑定文本值：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-text</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>除此之外，可以使用<code>v-once</code>指令，实现一次性插值，数据改变时不再更新内容，但是要注意会影响该标签内的所有数据绑定：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-once</span>&gt;</span>This will never change: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>使用<code>v-modal</code>来进行数据的双向绑定：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"message"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>当input的值变化是，message显示的内容也会变，反过来如果message的值变化，input框内的内容也会随之改变。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/front-end/vue-guide.html#more" rel="contents">
-              Read more &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1894,8 +1905,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">68</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
@@ -1929,8 +1940,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
-                    <span class="site-state-item-name">categories</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
               
@@ -2014,8 +2027,12 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
               
@@ -2094,7 +2111,7 @@
 
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -2102,7 +2119,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
