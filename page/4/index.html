@@ -44,44 +44,6 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
 
 
 
@@ -321,6 +283,292 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/oracle/ORA-01950.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/oracle/ORA-01950.html" itemprop="url">ORA-01950:no privileges on tablespace xxxx</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-16T10:01:43+08:00">2017-01-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>ORA-01950: 对表空间xxxx无权限</p>
+</blockquote>
+<p><strong>原因：</strong><br>未给当前用户分配表空间配额。</p>
+<p><strong>解决办法：</strong><br>用<code>sysdba</code>登录, <code>grant user 用户 quota 1m on 表空间;</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/oracle/ORA-00998.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/oracle/ORA-00998.html" itemprop="url">ORA-00998:must name this expression with a column alias</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-16T09:59:55+08:00">2017-01-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>ORA-00998: 必须使用别名命名此表达式</p>
+</blockquote>
+<p><strong>原因：</strong><br><code>SQL&gt; create view clock as select to_char(sysdate, ‘HH24:MI:SS’) from dual;</code><br>上述表达式便会报出此错。<br>纠结原因在于，创建view时如果使用子查询，必须有明确的列名，那么虚拟列必须有别名来命名表达式。</p>
+<p><strong>解决办法：</strong><br>给表达式添加别名。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ihave.news/post/oracle/ORA-00935.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -463,7 +711,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/experience/hexo-next-blog.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/knowledge-repo/hexo-next-blog.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -482,7 +730,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/experience/hexo-next-blog.html" itemprop="url">Hexo博客系统+Next主题+CND加速建站备忘</a></h2>
+                <a class="post-title-link" href="/post/knowledge-repo/hexo-next-blog.html" itemprop="url">Hexo博客系统+Next主题+CND加速建站备忘</a></h2>
         
 
         <div class="post-meta">
@@ -515,7 +763,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/experience/" itemprop="url" rel="index"><span itemprop="name">experience</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge repo</span></a></span>
 
                 
                 
@@ -557,7 +805,7 @@
 <p>创建新页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &lt;page&gt;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/post/experience/hexo-next-blog.html#more" rel="contents">
+            <a class="btn" href="/post/knowledge-repo/hexo-next-blog.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -685,256 +933,6 @@
 <p>解决办法：是加上一个斜杠。这样就告诉weblogic是从根之后的路径，这已经是个绝对路径，则跳转成功。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.sendRedirect(<span class="string">"/applogin?path=personcenter"</span>);</span><br></pre></td></tr></table></figure></p>
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/ar-knowledge-02.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/uncategorized/ar-knowledge-02.html" itemprop="url">【转】增强现实原理浅析（二）</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T11:03:17+08:00">2016-07-21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>先从自定义模板AR说起，原理和固定模板AR大致相同，<br>差就差在模板的检测上，主要是通过检测特征点，<br>然后根据不同帧间相应特征点的位置变化求得[R|t]矩阵，<br>BazAR便是这种类型的，其他的像下面这个链接，用很少的代码实现了这种类型AR的demo，<br><a href="http://www.morethantechnical.com/2010/11/10/20-lines-ar-in-opencv-wcode/" target="_blank" rel="noopener">http://www.morethantechnical.com/2010/11/10/20-lines-ar-in-opencv-wcode/</a> ，<br>这个代码里用的是光流法进行特征点的跟踪，<br>下面这个链接的代码，用的是surf特征，<br><a href="http://morethantechnical.googlecode.com/svn/trunk/opencv_ar/" target="_blank" rel="noopener">http://morethantechnical.googlecode.com/svn/trunk/opencv_ar/</a> ，<br>不管怎么样除了特征不同，坐标系变换的原理都和上一篇文章类似，<br>在OpenCV中提供了一些函数可以轻松实现坐标系变换，<br>比如solvePnP和cvFindHomography。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/uncategorized/ar-knowledge-02.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/ar-knowledge-01.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/uncategorized/ar-knowledge-01.html" itemprop="url">【转】增强现实原理浅析（一）</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T10:56:17+08:00">2016-07-21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>增强现实这货，挺有意思，至少我这种准技术宅对它颇有好感。<br>想象你大爱的动漫人物啪的跳到你的桌子上，我找过一个初音跳舞的demo，<br>想象你带上类似google glass之类的东西，轻松导航，识人辫物，<br>想象你拿着摄像头对着女朋友，啪的长出两只猫耳朵，一个猫尾巴，（好恶趣味，机器人笔记里看到的）<br>…<br>总之不多想了，增强现实也可以说是混合现实，是将虚拟事物与现实事物的混合，<br>相对于沉浸式的完全虚拟世界的虚拟现实，<br>增强现实保留了现实这一元素，作为一种桥梁般的存在。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/uncategorized/ar-knowledge-01.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1121,7 +1119,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/img-div-center.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/css/img-div-center.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -1140,7 +1138,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/uncategorized/img-div-center.html" itemprop="url">img图片在div中水平居中的实现方法</a></h2>
+                <a class="post-title-link" href="/post/css/img-div-center.html" itemprop="url">img图片在div中水平居中的实现方法</a></h2>
         
 
         <div class="post-meta">
@@ -1161,6 +1159,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1244,7 +1260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/catvplus-doc.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/bug/getJSON-bug.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -1263,130 +1279,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/uncategorized/catvplus-doc.html" itemprop="url">CATVPlus Documents</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-16T01:20:23+08:00">2016-07-16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Menu-菜单"><a href="#Menu-菜单" class="headerlink" title="Menu.菜单"></a>Menu.菜单</h2><p><strong>描述</strong>：支持接收JSON格式的数据，自动生成树形菜单。<br>JSON格式：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line"><span class="attr">"mid"</span>: <span class="string">"M001"</span>,<span class="attr">"mname"</span>: <span class="string">"首页"</span>,<span class="attr">"url"</span>: <span class="string">"http://blog.swroom.com"</span>,<span class="attr">"tag"</span>: <span class="string">"NEW"</span>,<span class="attr">"submenu"</span>: []&#125;,&#123;</span><br><span class="line"><span class="attr">"mid"</span>: <span class="string">"M002"</span>,<span class="attr">"mname"</span>: <span class="string">"车辆买卖"</span>,<span class="attr">"url"</span>: <span class="string">"#"</span>,<span class="attr">"tag"</span>: <span class="string">""</span>,<span class="attr">"submenu"</span>: [&#123;</span><br><span class="line"><span class="attr">"mid"</span>: <span class="string">"M003"</span>,<span class="attr">"mname"</span>: <span class="string">"新车"</span>,<span class="attr">"url"</span>: <span class="string">"#"</span>,<span class="attr">"tag"</span>: <span class="string">""</span>,<span class="attr">"submenu"</span>: []&#125;,&#123;</span><br><span class="line"><span class="attr">"mid"</span>: <span class="string">"M004"</span>, <span class="attr">"mname"</span>: <span class="string">"二手车"</span>,<span class="attr">"url"</span>: <span class="string">"#"</span>,<span class="attr">"tag"</span>: <span class="string">""</span>,<span class="attr">"submenu"</span>: []&#125;,&#123;</span><br><span class="line"><span class="attr">"mid"</span>: <span class="string">"M005"</span>,<span class="attr">"mname"</span>: <span class="string">"改装车"</span>,<span class="attr">"url"</span>: <span class="string">"#"</span>,<span class="attr">"tag"</span>: <span class="string">""</span>,<span class="attr">"submenu"</span>: []&#125;]</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure></p>
-<p>使用方法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/assets/js/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">id</span>=<span class="string">"menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个参数分别为：请求数据的url，需要绑定到的元素</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    InitMenu(<span class="string">"/init/menu"</span>, $(<span class="string">"#menu"</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="Carousel-图片轮播"><a href="#Carousel-图片轮播" class="headerlink" title="Carousel.图片轮播"></a>Carousel.图片轮播</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/getJSON-bug.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/uncategorized/getJSON-bug.html" itemprop="url">$.getJSON()不同写法就可导致样式失效</a></h2>
+                <a class="post-title-link" href="/post/bug/getJSON-bug.html" itemprop="url">$.getJSON()不同写法就可导致样式失效</a></h2>
         
 
         <div class="post-meta">
@@ -1407,6 +1300,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/bug/" itemprop="url" rel="index"><span itemprop="name">bug</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1491,7 +1402,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/carousel-bug-f0-is-undefined.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/exceptions/carousel-bug-f0-is-undefined.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -1510,7 +1421,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/uncategorized/carousel-bug-f0-is-undefined.html" itemprop="url">Bootstrap Carousel异常 TypeError f0 is undefined</a></h2>
+                <a class="post-title-link" href="/post/exceptions/carousel-bug-f0-is-undefined.html" itemprop="url">Bootstrap Carousel异常 TypeError f0 is undefined</a></h2>
         
 
         <div class="post-meta">
@@ -1523,6 +1434,150 @@
                 <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T20:56:21+08:00">2016-07-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/exceptions/" itemprop="url" rel="index"><span itemprop="name">exceptions</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>解决办法：</p>
+<blockquote>
+<p>Remove the data-ride=”carousel” from the div with ReviewCarousel, this sometimes cause the problem and give the TypeError: f[0].</p>
+</blockquote>
+<p>以上解决办法引用自<a href="http://stackoverflow.com/questions/37208085/typeerror-f0-is-undefined-in-bootstrap-min-js-when-this-error-occuured-and-ho" target="_blank" rel="noopener">stackoverflow.com</a></p>
+<p>去掉<code>data-ride=&quot;carousel&quot;</code>即可。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/springmvc-get-encoding.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/uncategorized/springmvc-get-encoding.html" itemprop="url">SpringMVC：GET方式中文乱码问题解决</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T10:57:56+08:00">2016-07-12</time>
             
 
             
@@ -1561,12 +1616,9 @@
       
         
           
-            <p>解决办法：</p>
-<blockquote>
-<p>Remove the data-ride=”carousel” from the div with ReviewCarousel, this sometimes cause the problem and give the TypeError: f[0].</p>
-</blockquote>
-<p>以上解决办法引用自<a href="http://stackoverflow.com/questions/37208085/typeerror-f0-is-undefined-in-bootstrap-min-js-when-this-error-occuured-and-ho" target="_blank" rel="noopener">stackoverflow.com</a></p>
-<p>去掉<code>data-ride=&quot;carousel&quot;</code>即可。</p>
+            <p>今天测试<code>Ajax+SpringMVC</code>传值，发现使用<code>GET</code>方式，SpringMVC获取到的参数内中文乱码，而<code>POST</code>方式则没有这个问题。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>forceEncoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在<code>web.xml</code>里配置的编码过滤器，是只针对<code>POST</code>方式生效的，要想<code>GET</code>不乱码，则必须要修改<code>Tomcat</code>的<code>server.xml</code>配置文件。<br>文件路径一般在<code>tomcat\conf\server.xml</code>，需要增加<code>useBodyEncodingForURI=&quot;true&quot;</code>。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">"8443"</span></span></span><br><span class="line"><span class="tag">			   <span class="attr">useBodyEncodingForURI</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>但是</strong>：配置<code>useBodyEncodingForURI=&quot;true&quot;</code>后，可以解决普通<code>get</code>请求的中文乱码问题，但是对于通过<code>ajax</code>发起的<code>get</code>请求中文依然会乱码，请把<code>useBodyEncodingForURI=&quot;true&quot;</code>改为<code>URIEncoding=&quot;UTF-8&quot;</code>即可。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">"8443"</span></span></span><br><span class="line"><span class="tag">			   <span class="attr">URIEncoding</span>=<span class="string">"UTF-8"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1653,7 +1705,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">68</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1690,7 +1742,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1779,7 +1843,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1916,8 +1986,6 @@
 
 
 
-  
-
 
 
 
@@ -1943,11 +2011,6 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

@@ -44,44 +44,6 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
 
 
 
@@ -321,6 +283,471 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/knowledge-repo/aliyun-config-note.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/knowledge-repo/aliyun-config-note.html" itemprop="url">从零配置阿里云服务器的Java运行环境</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T16:50:32+08:00">2018-04-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge repo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>安装PCRE</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update </span><br><span class="line">sudo apt-get install libpcre3 libpcre3-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装zlib</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make test</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装nginx，<a href="http://www.cnblogs.com/kunhu/p/3633002.html" target="_blank" rel="noopener">http://www.cnblogs.com/kunhu/p/3633002.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装mysql， <a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">下载地址</a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># https://dev.mysql.com/doc/refman/5.7/en/binary-installation.html</span><br><span class="line">shell&gt; groupadd mysql</span><br><span class="line">shell&gt; useradd -r -g mysql -s /bin/false mysql</span><br><span class="line">shell&gt; cd /usr/local</span><br><span class="line">shell&gt; tar zxvf /path/to/mysql-VERSION-OS.tar.gz</span><br><span class="line">shell&gt; ln -s full-path-to-mysql-VERSION-OS mysql</span><br><span class="line">shell&gt; cd mysql</span><br><span class="line">shell&gt; mkdir mysql-files</span><br><span class="line">shell&gt; chown mysql:mysql mysql-files</span><br><span class="line">shell&gt; chmod 750 mysql-files</span><br><span class="line">shell&gt; bin/mysqld --initialize --user=mysql </span><br><span class="line">shell&gt; bin/mysql_ssl_rsa_setup              </span><br><span class="line">shell&gt; bin/mysqld_safe --user=mysql &amp;</span><br><span class="line"># Next command is optional</span><br><span class="line">shell&gt; cp support-files/mysql.server /etc/init.d/mysql.server</span><br><span class="line"></span><br><span class="line"># http://www.cnblogs.com/rainisic/archive/2012/05/18/mysql_5_5_install.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mysql修改密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">killall -TERM MySQLd</span><br><span class="line">./bin/mysqld_safe --skip-grant-tables &amp;</span><br><span class="line">MySQL -u root </span><br><span class="line"></span><br><span class="line">update MySQL.user set authentication_string=PASSWORD(&apos;新密码&apos;) where User=&apos;root&apos;;</span><br><span class="line">flush privileges;</span><br><span class="line">quit;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password = password(&apos;root&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mysql远程连接报错1130, 无法给远程连接的用户权限问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 修改user表的host字段为%后，重启服务</span><br><span class="line">update user set host = &apos;%&apos; where user =&apos;root&apos;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动jar包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 后台启动</span><br><span class="line">nohup java -jar xxx.jar &amp;</span><br><span class="line"># 查看后台job</span><br><span class="line">jobs</span><br><span class="line"># 切换到某个进程</span><br><span class="line">fg 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>java.lang.UnsatisfiedLinkError:no net in java.library.path报错原因有可能是因为jar包损坏，拷贝、解压时有错误。</p>
+</li>
+<li><p>mybatis调用两次user = mapper.selectOne(user)，如果user之后赋值过新值，则user再次查询为null，但是实际执行语句和参数都没有任何问题，完全可以查出结果集。<br>这个的原因竟然是因为jdbc连接时的编码问题，只要在配置文件中的url里增加 <code>&amp;characterEncoding=utf8</code>即可解决，具体原因未明。</p>
+</li>
+<li><p>nginx 出现413 Request Entity Too Large问题的解决方法<br>在<code>http{}</code>段中加入 <code>client_max_body_size 20m;</code> 20m为允许最大上传的大小。</p>
+</li>
+<li><p>查看进程和杀死进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java</span><br><span class="line">kill -9 [pid]</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/blockchain/bitcoin-whitepaper-thinking.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/blockchain/bitcoin-whitepaper-thinking.html" itemprop="url">深入浅出解读比特币白皮书</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T22:57:33+08:00">2018-02-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/blockchain/" itemprop="url" rel="index"><span itemprop="name">blockchain</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>首先中本聪在摘要中就指明了要建立的是一个去中心化的p2p支付系统，并且不引入第三方来解决双重支付（double-spending）问题。并且提出了解决方案思路，提及时间戳（Timestamps）、工作量证明（Proof-of-Work）等技术要点。</p>
+<p>接下来看正文内容……</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>当前互联网上的金融贸易，无不都借助于可信赖的第三方，如国家强制性机构（银行），超大企业（支付宝、微信）等，是一种“基于信用的模式（trust based model）”，不是说当下模式不好用，只是既然基于信用，则需要持续不断的维护信用，其成本非常巨大。</p>
+<p>所以比特币出现了，它不再基于信用而是基于密码学原理，使得虚拟交易可以在双方达成一致，直接支付，不需要第三方参与。</p>
+<p>由于直接支付，确认后无法更改，所以是对卖家的一种保护，而对买家的保护，中本聪则提出“在此环境下通常设立第三方担保机制也可谓轻松加愉快”。其实说白了，比特币系统在设计上对交易双方是不平等的，天平更倾向于卖家，就像淘宝上买东西，杜绝了买家买货后给差评拒不付款的情况。但同时由于比特币交易确认后无法更改，也从另一个方面导致买家付了款而卖家据不发货的漏洞。</p>
+<p>这就是比特币给我们的另一个注意点，比特币网络其实是替代的中心化的信用机构，并不能保证交易双方的信用。就像上面说的买家拒不付款、卖家拒不发货此类情况，都是属于交易双方出现了信用问题，而由于此时没有第三方信用系统介入（淘宝、京东等），交易无法撤销，损失了就是损失了，这是比特币的优点也是它的痛点。</p>
+<p>交易成功后无法更改其实是有条件的，就是俗称的51%攻击。原文中有写到“除非重新完成全部的工作量证明，形成的记录将不可更改”，比特币采用的是复杂的工作量证明机制，更改交易区块，需要从该区块以及之后所有区块都重新计算，需要大量运算，非常耗时，所以在客观上是形成不可更改的目的。</p>
+<p>但是，试想，如果卖家买家达成一致，或者根据“多数人即正义”原则，有绝大数人同意修改呢？这是的的确确存在的比特币的缺陷，并且这个缺陷也给滥用留了空子。至今还记忆犹新的全球勒索病毒的爆发，勒索掉大量的比特币，这在全球绝大多数人眼里非正义行为，就可以在比特币的规则下，堂而皇之的钻空子，而我们却无力回滚其交易，因为比特币交易存在这客观不可更改。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/blockchain/bitcoin-whitepaper-thinking.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/MBA/mba-judge-scheme.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/MBA/mba-judge-scheme.html" itemprop="url">关于形成公司内部议事机制的思考</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T22:51:20+08:00">2018-02-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MBA/" itemprop="url" rel="index"><span itemprop="name">MBA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在针对公司“三重一大”、商业模式、组织架构、公司运营等事务上的决策，依靠各部门负责人加CEO组成的议事小组决议，执行者同时也是决策者。如何保证决策即不失公允性和正确性，又不会影响部门执行实施，是当下最需要考虑的事情。这就需要权力下放以保证执行力、责任加身以保证被约束、风险控制以保证正常运作。同时在议事小组内部需要形成一套“提案-商议-决策”方案。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/MBA/mba-judge-scheme.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ihave.news/post/knowledge-repo/ubuntu-16-04-config.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -373,7 +800,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge-repo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/knowledge-repo/" itemprop="url" rel="index"><span itemprop="name">knowledge repo</span></a></span>
 
                 
                 
@@ -408,31 +835,16 @@
 
       
         
-          
-            <h3 id="调整鼠标灵敏度"><a href="#调整鼠标灵敏度" class="headerlink" title="调整鼠标灵敏度"></a>调整鼠标灵敏度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xset mouse 1.5</span><br></pre></td></tr></table></figure>
+          <h3 id="调整鼠标灵敏度"><a href="#调整鼠标灵敏度" class="headerlink" title="调整鼠标灵敏度"></a>调整鼠标灵敏度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xset mouse 1.5</span><br></pre></td></tr></table></figure>
 <h3 id="状态栏添加网络流量监控"><a href="#状态栏添加网络流量监控" class="headerlink" title="状态栏添加网络流量监控"></a>状态栏添加网络流量监控</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor  </span><br><span class="line">sudo apt-get update  </span><br><span class="line">sudo apt-get install indicator-sysmonitor  </span><br><span class="line">indicator-sysmonitor &amp;</span><br></pre></td></tr></table></figure>
 <p>然后，可以配置开机启动，并且修改显示项。</p>
-<h3 id="ubuntu-16-04-配置环境变量，以jdk举例说明"><a href="#ubuntu-16-04-配置环境变量，以jdk举例说明" class="headerlink" title="ubuntu 16.04 配置环境变量，以jdk举例说明"></a>ubuntu 16.04 配置环境变量，以jdk举例说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/environment</span><br></pre></td></tr></table></figure>
-<p>文件末尾添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$JAVA_HOME/bin&quot;</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">export JAVA_HOME=/java/jdk1.8.0_121</span><br></pre></td></tr></table></figure></p>
-<p>保存后使环境变量生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/environment</span><br></pre></td></tr></table></figure></p>
-<p>还没完，现在的问题是如果重启电脑则会失效，还需要更改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p>文件末尾添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#set Java environment</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/dengyang/jdk1.8.0_56</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>使设置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
-<h3 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
-<h3 id="安装Rime中文输入法"><a href="#安装Rime中文输入法" class="headerlink" title="安装Rime中文输入法"></a>安装Rime中文输入法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ibus-rime</span><br></pre></td></tr></table></figure>
-<p>重启输入法搜索rime添加即可。</p>
-<h3 id="安装主题管理器"><a href="#安装主题管理器" class="headerlink" title="安装主题管理器"></a>安装主题管理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gnome-tweak-tool unity-tweak-tool</span><br></pre></td></tr></table></figure>
-<h3 id="搞定更新中断被锁的问题"><a href="#搞定更新中断被锁的问题" class="headerlink" title="搞定更新中断被锁的问题"></a>搞定更新中断被锁的问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br></pre></td></tr></table></figure>
-<h3 id="安装快速启动软件Albert"><a href="#安装快速启动软件Albert" class="headerlink" title="安装快速启动软件Albert"></a>安装快速启动软件Albert</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard/webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br></pre></td></tr></table></figure>
-<h3 id="安装本地wiki软件Zim"><a href="#安装本地wiki软件Zim" class="headerlink" title="安装本地wiki软件Zim"></a>安装本地wiki软件Zim</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zim</span><br></pre></td></tr></table></figure>
-<h3 id="修復一直卡在登錄頁面死循環的問題"><a href="#修復一直卡在登錄頁面死循環的問題" class="headerlink" title="修復一直卡在登錄頁面死循環的問題"></a>修復一直卡在登錄頁面死循環的問題</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + Alt + F1 登錄</span><br><span class="line">/usr/bin/sudo vim /etc/profile 刪除掉會引發異常的部分</span><br><span class="line">/usr/bin/sudo /sbin/reboot 重啓電腦</span><br></pre></td></tr></table></figure>
-<h3 id="创建快捷方式"><a href="#创建快捷方式" class="headerlink" title="创建快捷方式"></a>创建快捷方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">gedit xxx.desktop</span><br></pre></td></tr></table></figure>
-<h3 id="linux-使用微信，用electron套壳"><a href="#linux-使用微信，用electron套壳" class="headerlink" title="linux 使用微信，用electron套壳"></a>linux 使用微信，用electron套壳</h3><p><a href="https://github.com/geeeeeeeeek/electronic-wechat/releases" target="_blank" rel="noopener">https://github.com/geeeeeeeeek/electronic-wechat/releases</a></p>
-<h3 id="linux-使用ss代理"><a href="#linux-使用ss代理" class="headerlink" title="linux 使用ss代理"></a>linux 使用ss代理</h3><p>安装shadowsocks-qt5<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure></p>
-<p>配置代理服务器，无需多言<br>配置全局代理，需要使用genpac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-pip</span><br><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">sudo pip install genpac</span><br><span class="line">pip install --upgrade genpac</span><br><span class="line"></span><br><span class="line">genpac -p &quot;SOCKS5 127.0.0.1:1080&quot;  --gfwlist-url=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt --output=&quot;autoproxy.pac&quot;</span><br></pre></td></tr></table></figure></p>
-<p>点击：System settings &gt; Network &gt; Network Proxy，选择 Method 为 Automatic，设置 Configuration URL 为 autoproxy.pac 文件的路径，点击 Apply System Wide。<br>格式如：file:///home/tsunglei/autoproxy.pac</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/knowledge-repo/ubuntu-16-04-config.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -568,8 +980,7 @@
 
       
         
-          
-            <p>最近玩slack接触到 <code>Travis CI</code>，又突然想起自己好久没写技术blog了，想想尘封已久的hexo+coding.net，心想能不能把Travis CI加进去。</p>
+          <p>最近玩slack接触到 <code>Travis CI</code>，又突然想起自己好久没写技术blog了，想想尘封已久的hexo+coding.net，心想能不能把Travis CI加进去。</p>
 <p>先列举要用到的东西：</p>
 <ul>
 <li>Hexo - 快速、简洁且高效的博客框架</li>
@@ -578,38 +989,13 @@
 <li>Travis CI - 一个持续集成测试工具</li>
 </ul>
 <p>其中，Travis CI 是我最新接触的，它是一款很好用的持续集成测试工具。它可以自动关联Github上的项目并且clone下来编译测试，现在就是利用它这一特性来实现hexo博客自动编译、部署。</p>
-<h2 id="步骤及重点"><a href="#步骤及重点" class="headerlink" title="步骤及重点"></a>步骤及重点</h2><p>一些网上和官方文档都很明确的步骤不再详细叙述，只做记录，提高效率。</p>
-<h3 id="一、先搞Hexo"><a href="#一、先搞Hexo" class="headerlink" title="一、先搞Hexo"></a>一、先搞Hexo</h3><p>Hexo建站参考<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">Hexo官方文档</a></p>
-<p>没难度，需要注意几个点：</p>
-<ol>
-<li><p>增加<code>hexo-deployer-git</code>依赖，防止部署时报错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>增加<code>hexo-util</code>到<code>dev</code>依赖，防止travis的npm版本&lt;3,出现的<code>Error: Cannot find module &#39;hexo-util&#39;</code>错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev hexo-util</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="二、配置Github"><a href="#二、配置Github" class="headerlink" title="二、配置Github"></a>二、配置Github</h3><p>建库、同步本地什么的都是github基础操作，注意一点，建两个分支，<code>master</code>分支和对应源码，<code>gh-pages</code>分支作为hexo生成的静态页面上传分支。网上很多都说要用到xxx.github.io这个项目的，其实没必要，只需要推到其他分支即可，然后在setting里配置要作为页面显示的是哪个分支即可。</p>
-<h3 id="三、使用NexT主题"><a href="#三、使用NexT主题" class="headerlink" title="三、使用NexT主题"></a>三、使用NexT主题</h3><p>这个可以参考<a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.cn.md" target="_blank" rel="noopener">Next帮助文档</a>，步骤说明很详细。</p>
-<p>其中需要注意的点：</p>
-<ol>
-<li>就是上边说的hexo-util的问题，已给出解决办法。</li>
-<li>关于语言的问题，<code>v5.1.x</code>版本的中文是<code>zh-Hans</code>，而<code>v6.0.0</code>的中文是<code>zh-CN</code>，注意区分。</li>
-<li>关于主题的配置文件，采用了<code>Hexo data files</code>特性，利用这个特性，可以放心更新next主题，而不担心配置丢失或烦于合并。</li>
-<li><code>v6.0.0</code>的fancybox移至外部仓库依赖，所以需要自行添加，添加方法参见<a href="https://github.com/theme-next/theme-next-fancybox" target="_blank" rel="noopener">详细安装步骤</a>。</li>
-</ol>
-<h3 id="四、配置Travis-CI"><a href="#四、配置Travis-CI" class="headerlink" title="四、配置Travis CI"></a>四、配置Travis CI</h3><p>重点来了，详细步骤可参考<a href="https://segmentfault.com/a/1190000004667156" target="_blank" rel="noopener">用 Travis CI 自动部署 hexo</a>，作者已经说的比较详细。</p>
-<p>需要注意的一点是：在<code>package.json</code>中增加<code>depoly</code>的命令行语句，防止travis在自动执行到<code>npm run deploy</code>这一步的时候报找不到该script的错。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "deploy": "hexo clean &amp;&amp; hexo g -d"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
-<p>上述代码加在<code>dependencies</code>同级即可。</p>
-<p>其实配置完Travis发现，其实原理就是让Travis在云上帮我们执行本地化的编译、部署等操作，它也需要git pull项目下来，npm install安装依赖，hexo d -g去编译静态博客，并且依旧需要遵循github的权限验证，所以才需要配置了共私钥对。</p>
-<p>举一反三，通过这个博客的配置，同时也学会了使用Travis做持续集成测试。除了可以应用到其他项目中去，同时也开启了新世界的大门。</p>
-<h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><ol>
-<li>配置自定义的css样式，主题目录下<code>source/css/_custom/custom.styl</code></li>
-<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT使用说明</a></li>
-</ol>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>在此基础上，研究slack集成travis，让每次自动测试的结果及时推送到slack上，完美！</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/knowledge-repo/hexo-github-travis-blog.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -658,7 +1044,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/javascritp-skills.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/js/javascritp-skills.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -677,7 +1063,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/uncategorized/javascritp-skills.html" itemprop="url">阮一峰Javascript笔记</a></h2>
+                <a class="post-title-link" href="/post/js/javascritp-skills.html" itemprop="url">阮一峰Javascript笔记</a></h2>
         
 
         <div class="post-meta">
@@ -698,6 +1084,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">js</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -727,24 +1131,15 @@
 
       
         
-          
-            <h2 id="Javascript闭包"><a href="#Javascript闭包" class="headerlink" title="Javascript闭包"></a>Javascript闭包</h2><p>由于JS的“链式作用域”结构（子对象会一级级向上寻找到父对象的所有变量，而父对象却不能访问子对象的变量），如果想让外部访问方法内的局部变量，则要使用闭包。</p>
+          <h2 id="Javascript闭包"><a href="#Javascript闭包" class="headerlink" title="Javascript闭包"></a>Javascript闭包</h2><p>由于JS的“链式作用域”结构（子对象会一级级向上寻找到父对象的所有变量，而父对象却不能访问子对象的变量），如果想让外部访问方法内的局部变量，则要使用闭包。</p>
 <p>闭包就是能够读取其他函数内部变量的函数，在Javascript中，可以理解成“定义在一个函数内部的函数”。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="number">999</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        alert(n); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> result=f1();</span><br><span class="line">result(); <span class="comment">// 999</span></span><br></pre></td></tr></table></figure>
-<p>这段代码中，<code>f2</code> 就是闭包。其实在平常的vue使用过程中，关于 <code>this</code> 指代 <code>vm</code> 的问题上就是闭包。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name : <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()()); <span class="comment">// My Object</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name : <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()()); <span class="comment">// The Window</span></span><br></pre></td></tr></table></figure>
-<p>通过以上两个示例，则可以理解闭包的含义。</p>
-<h2 id="获取网页大小（clientWidth和clientHeight）"><a href="#获取网页大小（clientWidth和clientHeight）" class="headerlink" title="获取网页大小（clientWidth和clientHeight）"></a>获取网页大小（clientWidth和clientHeight）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.compatMode == <span class="string">"BackCompat"</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">document</span>.body.clientWidth,</span><br><span class="line">            height: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            height: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个方法就是获取网页（视口）大小，但是要注意：</p>
-<ol>
-<li>这个方法必须要在页面加载完成后才能运行，否则document对象还没生成，会报错。</li>
-<li>大多数情况 <code>document.documentElement.clientWidth</code> 返回正确值，但是IE6是 <code>document.body.clientWidth</code>。</li>
-<li>clientWidth和clientHeight都是只读属性，不能对它们赋值。</li>
-</ol>
-<p>获取带滚动条的网页大小的方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPagearea</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.compatMode == <span class="string">"BackCompat"</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.scrollWidth,</span><br><span class="line">　　　　　　　　　　　　　　　<span class="built_in">document</span>.body.clientWidth),</span><br><span class="line">            height: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.scrollHeight,</span><br><span class="line">　　　　　　　　　　　　　　　　<span class="built_in">document</span>.body.clientHeight)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            width: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.documentElement.scrollWidth,</span><br><span class="line">　　　　　　　　　　　　　　　　<span class="built_in">document</span>.documentElement.clientWidth),</span><br><span class="line">            height: <span class="built_in">Math</span>.max(<span class="built_in">document</span>.documentElement.scrollHeight,</span><br><span class="line">　　　　　　　　　　　　　　　　<span class="built_in">document</span>.documentElement.clientHeight)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>获取元素位置还可以使用 <code>getBoundingClientRect()</code> 方法，它返回一个对象，其中包含了left、right、top、bottom四个属性，分别对应了该元素的左上角和右下角相对于浏览器窗口（viewport）左上角的距离。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> X= <span class="keyword">this</span>.getBoundingClientRect().left;</span><br><span class="line"><span class="keyword">var</span> Y =<span class="keyword">this</span>.getBoundingClientRect().top;</span><br></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/post/js/javascritp-skills.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1123,7 +1518,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/front-skills.html">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/js/front-skills.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tsunglei Ching">
@@ -1142,7 +1537,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/front-end/front-skills.html" itemprop="url">前端开发技巧总结</a></h2>
+                <a class="post-title-link" href="/post/js/front-skills.html" itemprop="url">前端开发技巧总结</a></h2>
         
 
         <div class="post-meta">
@@ -1175,7 +1570,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">js</span></a></span>
 
                 
                 
@@ -1414,446 +1809,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/photo/miephoto-01.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/photo/miephoto-01.html" itemprop="url">咩学摄影 之 构图</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T20:37:50+08:00">2017-02-27</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/photo/" itemprop="url" rel="index"><span itemprop="name">photo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>构图是一张作品的骨架，有了好的构图思路，精彩的作品就能顺手拈来，轻而易举。</p>
-</blockquote>
-<h2 id="对角线构图"><a href="#对角线构图" class="headerlink" title="对角线构图"></a>对角线构图</h2><p>对角线构图是指物体在画幅中两对角的连线，是一种导向性很强的构图形式。</p>
-<p>其优点是富于动感，显得活泼，容易产生线条的汇聚趋势，具有纵向感，吸引人的视线并突出主题。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/photo/miephoto-01.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/front-end/ajax-load-page-content.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/front-end/ajax-load-page-content.html" itemprop="url">使用Ajax实现页面局部刷新</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T10:16:34+08:00">2017-02-24</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">front-end</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>起因是在做前端页面时，左侧的菜单栏采用手风琴样式，点击菜单打开新页面刷新后，菜单的状态不能保存，新页面或刷新后，菜单会还原到初始阶段，并且这种方式，每次刷新或加载页面都会重新加载一遍菜单，导致不必要的资源浪费。</p>
-<p>所以开始阶段有思考几种解决方案：</p>
-<ol>
-<li>使用<code>&lt;iframe&gt;</code>标签隔离父-子页面，导航菜单栏放在主体父页面中，菜单链接的页面在iframe子页面中加载。但是iframe会带来安全问题、拖累页面加载速度等，初步将此项排除。</li>
-<li>保存导航菜单每次点击前的状态到<code>cookie</code>中，当刷新或加载新页面时从cookie中读取状态。此种方式需要在每次页面加载操作时都执行js对应方法保存或读取cookie信息，很繁琐。</li>
-<li><code>Ajax</code>方式实现局部刷新，只需调用jquery的<code>.load()</code>方法即可。此种方式是加载远程页面内容到指定的div中，而页面其他部分并不刷新。<br>点击<a href="http://api.jquery.com/load/" target="_blank" rel="noopener">查看文档</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$( <span class="string">"#result"</span> ).load( <span class="string">"ajax/test.html"</span> );</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/Note/prints-liujinping.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/Note/prints-liujinping.html" itemprop="url">刘金平版画展 - 嘉木美术馆</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T11:29:08+08:00">2017-02-22</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <span itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><img itemprop="url image" src="http://swroom.qiniudn.com/banyu.jpg" class="full-image" alt="banyu" title="版语"><meta itemprop="width" content="auto"><meta itemprop="height" content="auto"></span>
-<p>昨日与朋友一行三人去了嘉木美术馆，参观了刘金平先生的版画展。</p>
-<p>嘉木是全国唯一365天开馆的美术馆，从湖南路老舍公园西侧小路北上不远，在一座浓郁老城区风格的二层小楼里转手便是，其馆面积并不很大，但初入其中却感温馨。展室有上下两层，顺着红色木质旋转回廊而上即可到达二层。</p>
-<p>本期主题是刘金平先生的版画，2月19日开展，持续到3月4日。前些日子是在朋友圈看到从此画展的消息，其中一张描绘青岛初秋的作品吸引了我，恰逢周末，遂决定约了朋友一起前来，我们当日启程时已略晚，但有幸在闭馆前抵达。</p>
-<p>兜兜转转看到最后的一幅作品就是此图，其实它就摆放在二层展室门口旁边的位置，恰巧却是从另一侧转了一圈回到门口时发现的。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/Note/prints-liujinping.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1905,7 +1860,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">68</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1942,7 +1897,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2031,7 +1998,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2168,8 +2141,6 @@
 
 
 
-  
-
 
 
 
@@ -2195,11 +2166,6 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="bitcoin,blockchain," />
+
+
+<meta name="description" content="摘要首先中本聪在摘要中就指明了要建立的是一个去中心化的p2p支付系统，并且不引入第三方来解决双重支付（double-spending）问题。并且提出了解决方案思路，提及时间戳（Timestamps）、工作量证明（Proof-of-Work）等技术要点。 接下来看正文内容…… 简介当前互联网上的金融贸易，无不都借助于可信赖的第三方，如国家强制性机构（银行），超大企业（支付宝、微信）等，是一种“基于信">
+<meta name="keywords" content="bitcoin,blockchain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出解读比特币白皮书">
+<meta property="og:url" content="http://ihave.news/post/blockchain/bitcoin-whitepaper-thinking.html">
+<meta property="og:site_name" content="iHave.News">
+<meta property="og:description" content="摘要首先中本聪在摘要中就指明了要建立的是一个去中心化的p2p支付系统，并且不引入第三方来解决双重支付（double-spending）问题。并且提出了解决方案思路，提及时间戳（Timestamps）、工作量证明（Proof-of-Work）等技术要点。 接下来看正文内容…… 简介当前互联网上的金融贸易，无不都借助于可信赖的第三方，如国家强制性机构（银行），超大企业（支付宝、微信）等，是一种“基于信">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-09T15:25:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出解读比特币白皮书">
+<meta name="twitter:description" content="摘要首先中本聪在摘要中就指明了要建立的是一个去中心化的p2p支付系统，并且不引入第三方来解决双重支付（double-spending）问题。并且提出了解决方案思路，提及时间戳（Timestamps）、工作量证明（Proof-of-Work）等技术要点。 接下来看正文内容…… 简介当前互联网上的金融贸易，无不都借助于可信赖的第三方，如国家强制性机构（银行），超大企业（支付宝、微信）等，是一种“基于信">
+
+
+
+
+
+
+  <link rel="canonical" href="http://ihave.news/post/blockchain/bitcoin-whitepaper-thinking.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>深入浅出解读比特币白皮书 | iHave.News</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iHave.News</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">I have news for you.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/blockchain/bitcoin-whitepaper-thinking.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">深入浅出解读比特币白皮书</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T22:57:33+08:00">2018-02-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/blockchain/" itemprop="url" rel="index"><span itemprop="name">blockchain</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>首先中本聪在摘要中就指明了要建立的是一个去中心化的p2p支付系统，并且不引入第三方来解决双重支付（double-spending）问题。并且提出了解决方案思路，提及时间戳（Timestamps）、工作量证明（Proof-of-Work）等技术要点。</p>
+<p>接下来看正文内容……</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>当前互联网上的金融贸易，无不都借助于可信赖的第三方，如国家强制性机构（银行），超大企业（支付宝、微信）等，是一种“基于信用的模式（trust based model）”，不是说当下模式不好用，只是既然基于信用，则需要持续不断的维护信用，其成本非常巨大。</p>
+<p>所以比特币出现了，它不再基于信用而是基于密码学原理，使得虚拟交易可以在双方达成一致，直接支付，不需要第三方参与。</p>
+<p>由于直接支付，确认后无法更改，所以是对卖家的一种保护，而对买家的保护，中本聪则提出“在此环境下通常设立第三方担保机制也可谓轻松加愉快”。其实说白了，比特币系统在设计上对交易双方是不平等的，天平更倾向于卖家，就像淘宝上买东西，杜绝了买家买货后给差评拒不付款的情况。但同时由于比特币交易确认后无法更改，也从另一个方面导致买家付了款而卖家据不发货的漏洞。</p>
+<p>这就是比特币给我们的另一个注意点，比特币网络其实是替代的中心化的信用机构，并不能保证交易双方的信用。就像上面说的买家拒不付款、卖家拒不发货此类情况，都是属于交易双方出现了信用问题，而由于此时没有第三方信用系统介入（淘宝、京东等），交易无法撤销，损失了就是损失了，这是比特币的优点也是它的痛点。</p>
+<p>交易成功后无法更改其实是有条件的，就是俗称的51%攻击。原文中有写到“除非重新完成全部的工作量证明，形成的记录将不可更改”，比特币采用的是复杂的工作量证明机制，更改交易区块，需要从该区块以及之后所有区块都重新计算，需要大量运算，非常耗时，所以在客观上是形成不可更改的目的。</p>
+<p>但是，试想，如果卖家买家达成一致，或者根据“多数人即正义”原则，有绝大数人同意修改呢？这是的的确确存在的比特币的缺陷，并且这个缺陷也给滥用留了空子。至今还记忆犹新的全球勒索病毒的爆发，勒索掉大量的比特币，这在全球绝大多数人眼里非正义行为，就可以在比特币的规则下，堂而皇之的钻空子，而我们却无力回滚其交易，因为比特币交易存在这客观不可更改。</p>
+<a id="more"></a>
+<h2 id="交易"><a href="#交易" class="headerlink" title="交易"></a>交易</h2><p>Transaction这一块内容是中本聪设计最核心也是最精妙的部分，让人赞叹。先奉上原图，注意是英文原版白皮书原图，不是网上流行的中文翻译版的图，中文图是错误的，整整误导了我很久。</p>
+<p>首先搞懂白皮书里给出的coin的定义：”一枚电子货币（an electronic coin）是这样的一串数字签名“。首先比特币这个概念就很绕，即不跟现实货币相同，也和类似Q币这样的不同。Q币可以理解为线上流通的实体货币的代币，也会记录拥有者姓名、数量等信息。而比特币实际上根本不记录都有谁谁谁，谁拥有多少币，也没有户头概念，所有的这些都是通过交易记录反推得来。</p>
+<p>例如，Q币的记录方式是A有100个Q币，B有50个Q币，A转给B10个Q币，则A户头上-10Q币，B户头上+10Q币，这是中心化的运作方式，包括银行都是这样。而比特币的记录可能就是一条“A给B10个比特币”，无数个这样的交易记录组成交易链，就形成来一个去中心化的，公开透明的公共账本。如果A想要知道自己有多少比特币，那么就援引所有他参与过的交易来反推出数量。</p>
+<p>明白了这个原理，我们来看如何将比特币从一个人发给另一个人。</p>
+<p>比如说一笔交易记录：张三发给李四5个比特币。</p>
+<p>发送者（张三）要做的事情是：把这条交易信息和目标地址（李四的公钥）做个HSAH，然后用自己的私钥进行数字签名（即用张三的私钥加密这个哈希值），同时将这个数字签名附到这笔Tx（交易）里，然后通过p2p技术发送给李四。</p>
+<p>李四收到这条消息后怎么做：拿着这笔交易里公布的张三的公钥来验证数据（公钥解密）得到哈希值x，同时，用自己的公钥和交易信息做哈希得到hash(data)，然后对比x=hash(data)，则可以判断出这笔交易来自于张三。因为公钥验证出的哈希值只有私钥才能生成，而拿张三的公钥验证的，必然是张三的私钥，私钥只会存在张三那里，抵赖是抵赖不掉的。这里就用到来非对称加密，私钥数字签名，公钥验证数据。公钥确定钱包地址，私钥确定所有权。</p>
+<blockquote>
+<p>知识点一：非对称加密<br>    公钥可以加密数据或验证数据，私钥可以解密数据或对数据签名。<br>    公钥加密数据，只能用私钥解密。<br>    私钥加密数据（这个过程叫数据签名），只能用公钥解密（验证数据）。<br>    区块链在设计交易（Transaction）的时候，就是用不对称加密算法（SHA-256）。</p>
+</blockquote>
+<p>既然是支付系统，逃不开的就是双花（double-spending）问题。</p>
+<blockquote>
+<p>知识点二：双重花费问题<br>如果同一笔钱，被重复支付两次，这就是双花问题。<br>现实世界中你伪造一块黄金拿去交易，很容易被证伪，而虚拟世界中的物品被复制太容易了，一前一后用同一笔钱发起两笔交易，看似都没有任何问题，但这就存在双花问题。</p>
+</blockquote>
+<p>中心化的支付系统（支付宝、银行等）并不是不存在双花问题，只是更好解决而已。例如银行转账，A户头转账100元到B户头，银行会开启事务，A户头-100，B户头+100。这个过程类比铸币厂来说，银行会先作废掉A户头的100，然后重新发行新的100给B户头。由于A户头上的100元被作废掉了，所以就解决了双花问题。</p>
+<p>那么，比特币是怎么解决双花问题的呢？老样子，多数即正义。首先是要求所有交易对全网公开，所有人都可以追溯每一笔交易的来龙去脉，无法造假。二来每笔交易都有个时间戳，这样就能确定先后顺序，形成时间序列交易链。三是绝大多数的节点承认交易是首次出现的。这里就引出了下一章节的概念：时间戳服务器。</p>
+<h2 id="时间戳服务器"><a href="#时间戳服务器" class="headerlink" title="时间戳服务器"></a>时间戳服务器</h2><p>时间戳服务器通过对区块加盖时间戳，则能证明某些数据在某些特定时间是确实存在的。每个时间戳都会有前一个时间戳的信息，这样时间戳也形成一个链条，后一个时间戳就是对前一个的增强。这样就算有人想篡改某一个时间戳，则需要把其之后的所有时间戳都改掉，这个过程是有工作量证明的，将会大量耗时和算力，从而保证不可被篡改。</p>
+<p>现在又出现思考，比特币不是说去中心化的么，怎么又出来个时间戳服务器，有服务器不就又成了中心化的。其实不是这样的，此服务器非彼服务器，还是那句话，多数即正义，时间取自于其他至少5个节点的时间的中位数，并且中位数跟本地时间相差不能超过70分钟。</p>
+<blockquote>
+<p>知识点三：中位数<br>一个数学概念，统计学中的专有名词，代表一个样本、种群或概率分布中的一个数值，其可将数值集划分为相等的上下两个部分。<br>中位数是以它在所有标志值中所处的位置确定的全体单位标志值的代表值，不受分布数列的极大或极小值影响，从而在一定程度上提高了中位数对分布数列的代表性。</p>
+</blockquote>
+<p>所以说中位数比平均数更不受极端值的影响，更能代表分布数列的中间值。</p>
+<p>时间戳的运行机制就是两个区块产生间隔中所有交易进行Hash运算，加盖时间戳，我们就得到了一个按时间序列产生的交易记录了，这就是区块链。</p>
+<h2 id="工作量证明"><a href="#工作量证明" class="headerlink" title="工作量证明"></a>工作量证明</h2><p>工作量证明，就是俗称的“挖矿”。一来浪费电力，二来浪费算力，并且比特币并不是挖矿挖出来的货币，那么为什么还需要挖矿呢？</p>
+<p>试想，有一笔交易产生了，并广播给全网，现在A、B、C三个人都收到了这个交易信息，都可以对交易进行加盖时间戳，然后打包区块到链上去。但是每个人接受到的交易信息不一样，并且接受的时间也不一样，那么产生的区块hash就千差万别。所以此时需要一个共识机制，在全网达成共识，就需要引入竞争机制。就如同长跑一样，谁第一个撞线，就给谁记账（加盖时间戳、打包区块）的权利。那怎么样制造一个所有人都参与长跑的场景呢，工作量证明（Proof-of-Work）机制就来了。</p>
+<p>白皮书里定义了如何工作量证明，即借用CPU的算力进行穷举法，有概率性的碰撞出所需要的值，比如一串开头有N个0的hash值。这个过程是需要付出算力且耗时的，CPU算力的不同，A、B、C三人就有先后顺序了，第一个满足要求的人拥有下一个区块的记账权，这样就达成了共识。</p>
+<p>此时再试想，如果A、B、C中三人B通过工作量证明脱颖而出，拿到了记账权，如果他这时篡改交易记录或者恶意构造交易实现双花怎么办？</p>
+<p>由于有POW机制的存在，B拿到了记账权，同时他付出了电力成本、CPU算力成本，并且篡改比特币的某一笔交易，需要连带修改之后所有交易，其带来更大成本支出。当作恶成本远远大于篡改记录所得的利益时，就如同花100块钱的成本为了赚1块钱，他还会选择作恶么？</p>
+<p>工作量证明机制简单来讲就是提升了作恶的成本，让作恶的投入产出比低于做诚实节点的投入产出比，这就是中本聪运用博弈论的点睛之笔。</p>
+<p>另一个点，工作量证明的难度是随着时间而变化的，如果区块的产生速度过快，难度就会提升，从最初的CPU到GPU到矿池，挖矿成本一直在增加，难度是越来越大。所以日渐突出的一个问题就是，越来越多的普通CPU用户成为吃瓜群众，超大算力的CPU被矿池占据，不免让人担心纯POW的共识机制还能否继续完美保证比特币系统运行下去。所以后来也出现了像股权证明机制（POS）等新的共识机制来避免算力集中。</p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>前面几章依次讲述了比特币系统的交易、时间戳、工作量证明，到这里就讲述，比特币系统网络是怎么运行的，交易在网络中是怎么流转并打包成区块，并形成链的。</p>
+<p>前面的步骤其实很好理解，继续顺着工作量证明之后往下说，打包成区块后，向全网广播，不是说这个区块在记账完成就是有效的，还是要经过“多数人即正义”的验证的，当且仅当包含在该区块中的所有交易都是有效的且之前未存在过的，其他节点才认同该区块的有效性。“所有交易都有效”，“之前未存在过”这两点就是指全网节点验证交易和验证时间戳，占据绝大多数都验证通过后，这个区块方可被承认。</p>
+<p>全网接受了这个区块之后，接受的方法就是在这个区块末尾制造新区块，用以延长该区块。这个设计也很巧妙，目的就是促使生成一条最长链，并且最诚实，最正义，因为只有接受度最高的区块链才会被延长。</p>
+<h2 id="激励"><a href="#激励" class="headerlink" title="激励"></a>激励</h2><p>前面一直说工作量证明，直到这里才真正说明工作量证明的刺激点，大家伙为什么拼了命的耗电耗时耗算力地去做呢？因为有激励机制，只有在去中心化的系统有提供激励机制，才能保证长久运行下去，所谓“从激情开始，用利益维持”说的就是这个。</p>
+<p>比特币系统里的激励有两种。一是在“每个区块的第一笔交易进行特殊化处理，该交易产生一枚由该区块创造者拥有的新的电子货币”，这是用来补贴用于工作量证明的成本；二是交易费，“如果某笔交易的输出值小于输入值，那么差额就是交易费，该交易费将被增加到该区块的激励中”，这是用来补贴用于交易确认所产生的成本。</p>
+<h2 id="回收硬盘空间"><a href="#回收硬盘空间" class="headerlink" title="回收硬盘空间"></a>回收硬盘空间</h2><p>这个解决的是存储问题，由于处于比特币网络中的每个节点都会同步全部的交易记录，这个体积是在不断膨胀的。白皮书提出的解决方案是，使用Merkel Hash Tree方式存储被消费过的交易信息，只把这个Tree的Root节点保存进区块。而Merkel Hash Tree则由一些IPFS、公共节点、信任度高的节点来保存。同时如果想回溯交易，只需去对于的Tree里下载回所有交易记录即可。</p>
+<h2 id="简化支付认证"><a href="#简化支付认证" class="headerlink" title="简化支付认证"></a>简化支付认证</h2><p>这其实是回收硬盘空间所带出来的问题，当链上的节点保存的不再是完整的交易链信息时，必须要走一个简化的支付认证，这算是折衷方案。</p>
+<p>当某个存储Merkel Hash Tree节点遭受攻击或发现异常，系统会提示用户下载这个节点存储的数据来保证整条链上的交易数据是不被篡改的。同时一些金融机构或着对全部交易数据敏感的节点会一直保存下所有的交易记录，而不进行回收硬盘空间的折衷。</p>
+<h2 id="组合和分割价值"><a href="#组合和分割价值" class="headerlink" title="组合和分割价值"></a>组合和分割价值</h2><p>这一块内容又是对交易的一个补充，同时它灌输了一种观念，比特币跟现实货币是完全不一样的，没有单位换算，只有差额，价值的组合和分割完全可以用加减法来实现。</p>
+<p>最重要的一点是，明确来一个交易（Tx）包含多个Input和多个Output。</p>
+<p>由于比特币系统不记户头帐，只记录交易信息，所以每个人的持有货币数量都是由交易反推的。同理，当进行一笔交易时，你需要援引一条甚至多条交易记录来凑出你的电子货币，所以由多条输入（Input）。</p>
+<p>比特币系统交易还有一个特点，每次交易都把钱花光，意思就是Inputs=Outputs，所以输出一个是目标钱包的交易数量，另一个就是找零，找零全部返回付款方。</p>
+<h2 id="隐私"><a href="#隐私" class="headerlink" title="隐私"></a>隐私</h2><p>这个其实是大众很关心的问题，一方面比特币网络说是去中心化的，交易全透明的，另一方面又说比特币是匿名交易、不互信的，到底是怎么回事呢？</p>
+<p>其实很简单，比特币网络里没有户头概念，只有钱包地址，钱包地址是由公钥hash得来，在这个环节上钱包公开，公钥匿名。公众可以看到有一个钱包地址发送一笔数目给另一个钱包地址，但是没有信息能把钱包地址于某个人联系在一起，这样就保证了用户的隐私。这就是只看到有交易在发生，但是不知道是谁在交易。</p>
+<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><p>中本聪 《Bitcoin: A Peer-to-Peer Electronic Cash System》<br>大圣2017《（大鱼）精读比特币白皮书系列（1-6）》<br>godsex 《解密比特币白皮书（3） — 当你发送比特币，你在发送什么？》<br>金晓 《比特币白皮书 个人翻译+注解》<br>蒋宏伟 《比特币的交易-数字签名(一)》<br>aisen 《什么是“双重支付”问题，怎样解决？》<br>百度百科 《中位数》</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bitcoin/" rel="tag"># bitcoin</a>
+          
+            <a href="/tags/blockchain/" rel="tag"># blockchain</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/MBA/mba-judge-scheme.html" rel="next" title="关于形成公司内部议事机制的思考">
+                <i class="fa fa-chevron-left"></i> 关于形成公司内部议事机制的思考
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/knowledge-repo/aliyun-config-note.html" rel="prev" title="从零配置阿里云服务器的Java运行环境">
+                从零配置阿里云服务器的Java运行环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Tsunglei Ching" />
+            
+              <p class="site-author-name" itemprop="name">Tsunglei Ching</p>
+              <p class="site-description motion-element" itemprop="description">Read more, write better.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/raykr" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ray@boyamarine.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/uisecret" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/jing-yun-53-6/activities" target="_blank" title="Zhihu" rel="external nofollow"><i class="fa fa-fw fa-leaf"></i>Zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交易"><span class="nav-number">3.</span> <span class="nav-text">交易</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间戳服务器"><span class="nav-number">4.</span> <span class="nav-text">时间戳服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作量证明"><span class="nav-number">5.</span> <span class="nav-text">工作量证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络"><span class="nav-number">6.</span> <span class="nav-text">网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激励"><span class="nav-number">7.</span> <span class="nav-text">激励</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回收硬盘空间"><span class="nav-number">8.</span> <span class="nav-text">回收硬盘空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简化支付认证"><span class="nav-number">9.</span> <span class="nav-text">简化支付认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合和分割价值"><span class="nav-number">10.</span> <span class="nav-text">组合和分割价值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐私"><span class="nav-number">11.</span> <span class="nav-text">隐私</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录："><span class="nav-number">12.</span> <span class="nav-text">附录：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tsunglei Ching</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
