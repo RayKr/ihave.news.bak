@@ -283,6 +283,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/layui-by-api.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/uncategorized/layui-by-api.html" itemprop="url">封装layui的组件</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T22:52:47+08:00">2018-04-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="byselect"><a href="#byselect" class="headerlink" title="byselect"></a>byselect</h2><hr>
+<p>这是针对下拉列表的封装，可以支持本地数据源和远程请求的数据源，支持枚举表和sql查询。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><hr>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">"approvalStatus"</span> <span class="attr">by-filter</span>=<span class="string">"select"</span> <span class="attr">by-label</span>=<span class="string">"审核状态"</span> <span class="attr">by-enutype</span>=<span class="string">"approvalStatus"</span> <span class="attr">by-default</span>=<span class="string">"0"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">// ...</span></span></span><br><span class="line"><span class="javascript"><span class="comment">// 默认全部 by-filter="select" 的渲染</span></span></span><br><span class="line"><span class="undefined">byselect.render();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染下拉列表</span></span><br><span class="line">byselect.render(&#123;</span><br><span class="line">    elem: $(<span class="string">'#select-id'</span>)</span><br><span class="line">    , <span class="attr">label</span>: <span class="string">"审核状态"</span> <span class="comment">// 对应 by-label, 显示名称</span></span><br><span class="line">    , <span class="attr">type</span>: <span class="string">"approvalStatus"</span> <span class="comment">// 对应by-enutype， 枚举类型</span></span><br><span class="line">    , <span class="attr">defaultValue</span>: <span class="string">"0"</span> <span class="comment">// 默认值，对应by-default</span></span><br><span class="line">    , <span class="attr">async</span>: <span class="literal">true</span> <span class="comment">// 是否异步，默认为true， false时为同步方式</span></span><br><span class="line">    , <span class="attr">param</span>: &#123;&#125; <span class="comment">// 去后台请求时的参数对象</span></span><br><span class="line">    , <span class="attr">refresh</span>: <span class="literal">false</span> <span class="comment">// 强制刷新标识，默认为false，当为true时，每次执行的枚举都从后台获取，不走缓存</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取对应枚举值的枚举名称，先从缓存中获取，没有则去后台获取</span></span><br><span class="line">byselect.getEnuName(type, value);</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 注意事项</span></span><br><span class="line"><span class="string">1. 请求路径的问题，是在 `</span>config.js<span class="string">` 中的 `</span>enuUrl<span class="string">`配置的。</span></span><br><span class="line"><span class="string">2. 内部包含`</span>form.render()<span class="string">`重新渲染，所以只需要将`</span>&lt;select&gt;<span class="string">`放在`</span><span class="class"><span class="keyword">class</span></span>=<span class="string">"layui-form"</span><span class="string">`的标签内部即可，一定要！</span></span><br><span class="line"><span class="string">3. 获取后台枚举时，可以支持单枚举和多枚举获取，多枚举即type使用`</span>@<span class="string">`分割即可，但是注意返回值的json格式不同。</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>json</span><br><span class="line"><span class="comment">// 单枚举， data是object</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"code"</span>:<span class="number">200</span>,</span><br><span class="line">    <span class="string">"msg"</span>:<span class="string">""</span>,</span><br><span class="line">    <span class="string">"data"</span>: &#123;</span><br><span class="line">        <span class="string">"enus"</span>: [&#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"男"</span>,</span><br><span class="line">            <span class="string">"value"</span>: <span class="string">"1"</span></span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"女"</span>,</span><br><span class="line">            <span class="string">"value"</span>: <span class="string">"1"</span></span><br><span class="line">        &#125;],</span><br><span class="line">        <span class="string">"defaultValue"</span>: <span class="string">"2"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 多枚举，data是array</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"code"</span>:<span class="number">200</span>,</span><br><span class="line">    <span class="string">"msg"</span>:<span class="string">""</span>,</span><br><span class="line">    <span class="string">"data"</span>: [&#123;</span><br><span class="line">        <span class="string">"enus"</span>: [&#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"男"</span>,</span><br><span class="line">            <span class="string">"value"</span>: <span class="string">"1"</span></span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"女"</span>,</span><br><span class="line">            <span class="string">"value"</span>: <span class="string">"1"</span></span><br><span class="line">        &#125;],</span><br><span class="line">        <span class="string">"defaultValue"</span>: <span class="string">"2"</span></span><br><span class="line">    &#125;,&#123;</span><br><span class="line">        <span class="string">"enus"</span>: [&#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"已读"</span>,</span><br><span class="line">            <span class="string">"value"</span>: <span class="string">"1"</span></span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"未读"</span>,</span><br><span class="line">            <span class="string">"value"</span>: <span class="string">"2"</span></span><br><span class="line">        &#125;],</span><br><span class="line">        <span class="string">"defaultValue"</span>: <span class="string">"1"</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><h3 id="request请求方法"><a href="#request请求方法" class="headerlink" title="request请求方法"></a>request请求方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装自ajax</span></span><br><span class="line">request.get(url, param).done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</span><br><span class="line"><span class="comment">// 多种方式，同步异步</span></span><br><span class="line">request.getSync/post/postSync/put/del/jsonp/html/htmlSync</span><br></pre></td></tr></table></figure>
+<h3 id="request-url-url"><a href="#request-url-url" class="headerlink" title="request.url(url)"></a>request.url(url)</h3><p>封装相对路径为实际请求绝对路径，需配合<code>config.js</code>中<code>apiPath</code>使用。</p>
+<h3 id="request-getPKs-rows-key"><a href="#request-getPKs-rows-key" class="headerlink" title="request.getPKs(rows, key)"></a>request.getPKs(rows, key)</h3><p>获取行主键，之所以放到request中，是因为很多时候是在put和delete行数据时才会用到获取主键，而此时肯定是要用到request发送请求的，是为了方便。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>request已封装进token。</li>
+<li>url有两种方式，<code>普通写法</code>和<code>指定请求方式</code>的写法。可以满足更多种情况，更加灵活。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// front!url，此时告诉request这是一个前台url，不需要组合apiPath，传入的url原样请求</span><br><span class="line">request.get(&apos;front!http://ihave.news&apos;)</span><br><span class="line">// 虽然调用的post方法，但是指定了put!，则实际请求为put</span><br><span class="line">request.post(&apos;put!expo/list&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="bymenu"><a href="#bymenu" class="headerlink" title="bymenu"></a>bymenu</h2><h3 id="只有侧边栏"><a href="#只有侧边栏" class="headerlink" title="只有侧边栏"></a>只有侧边栏</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// menus 请求后台拿到的menus数据</span></span><br><span class="line"><span class="comment">// parent 侧边栏ul节点</span></span><br><span class="line">bymenu.showLeft(menus, parent);</span><br></pre></td></tr></table></figure>
+<h3 id="顶栏和侧边栏"><a href="#顶栏和侧边栏" class="headerlink" title="顶栏和侧边栏"></a>顶栏和侧边栏</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// menus 数据</span></span><br><span class="line"><span class="comment">// topNode 顶栏ul节点</span></span><br><span class="line"><span class="comment">// leftNode 侧边栏ul节点</span></span><br><span class="line">bymenu.showTopLeft(menus, topNode, leftNode);</span><br></pre></td></tr></table></figure>
+<h2 id="byprogress"><a href="#byprogress" class="headerlink" title="byprogress"></a>byprogress</h2><h3 id="byprogress-render-opts"><a href="#byprogress-render-opts" class="headerlink" title="byprogress.render(opts)"></a>byprogress.render(opts)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 进度条layer</span></span><br><span class="line">byprogress.render(&#123;</span><br><span class="line">    title: <span class="string">"上传进度"</span> <span class="comment">// layer标题</span></span><br><span class="line">    , <span class="attr">id</span>: <span class="string">"pro"</span> <span class="comment">// 用来标识lay-filter</span></span><br><span class="line">    , <span class="attr">url</span>: <span class="string">"expo/progress"</span> <span class="comment">// 向后台请求进度的url</span></span><br><span class="line">    , <span class="attr">done</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 进度条达到100%后的回调</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 注：默认500ms请求间隔</span></span><br></pre></td></tr></table></figure>
+<h2 id="byform"><a href="#byform" class="headerlink" title="byform"></a>byform</h2><p>其实也可以理解为layer和form的组合，一种配合html模板生成通用的模态窗口的组件。</p>
+<h3 id="byform-render"><a href="#byform-render" class="headerlink" title="byform.render"></a>byform.render</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">byform.render(&#123;</span><br><span class="line">    title: <span class="string">"title"</span> <span class="comment">// 模态框标题</span></span><br><span class="line">    , <span class="attr">area</span>: [<span class="string">'400px'</span>,<span class="string">'300px'</span>] <span class="comment">// 模态框宽、高</span></span><br><span class="line">    , <span class="attr">template</span>: <span class="string">'pages/customer/cus-template.html'</span> <span class="comment">// 模板文件路径，支持读取html文件</span></span><br><span class="line">    , <span class="attr">data</span>: &#123;&#125; <span class="comment">// 用来回填form表单的数据</span></span><br><span class="line">    , <span class="attr">dataId</span>: <span class="string">"customerId"</span> <span class="comment">// 用来指定PK字段</span></span><br><span class="line">    , <span class="attr">onOpen</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 打开后，渲染完毕后执行的回调</span></span><br><span class="line">    &#125;</span><br><span class="line">    , <span class="attr">onSubmit</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 点击确定，执行完提交后的回调</span></span><br><span class="line">    &#125;</span><br><span class="line">    , <span class="attr">tools</span>: [&#123;  <span class="comment">// 工具栏</span></span><br><span class="line">        title: <span class="string">'备忘录'</span>,</span><br><span class="line">        icon: <span class="string">'&amp;#xe63c;'</span>,</span><br><span class="line">        type: <span class="string">'prompt'</span>,</span><br><span class="line">        column: <span class="string">'content'</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            customerId: rows[<span class="number">0</span>].customerId,</span><br><span class="line">            noteType: <span class="string">'财务'</span>,</span><br><span class="line">            title: <span class="string">'维护财务信息'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        url: <span class="string">'post!crm/note'</span></span><br><span class="line">    &#125;]</span><br><span class="line">    , <span class="attr">config</span>: &#123;&#125; <span class="comment">// layer原生配置项</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="bytable"><a href="#bytable" class="headerlink" title="bytable"></a>bytable</h2><p>以上说的种种组件，其实都是为了最后这个大boss准备的。因为在一个管理系统中，最常用、最常出现的页面元素无非就是<code>form</code>,<code>select</code>,<code>table</code>,<code>toolbar</code>等，并且业务的开展都围绕了一个数据表格来进行。所以bytable是集成了各组件后的集成性组件。</p>
+<h3 id="bytable-render"><a href="#bytable-render" class="headerlink" title="bytable.render"></a>bytable.render</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tableIns = bytable.render(&#123;</span><br><span class="line">    elem: <span class="string">'#merchant'</span>,</span><br><span class="line">    <span class="comment">// table后台数据源地址</span></span><br><span class="line">    url: <span class="string">'crm/customer/general'</span>,</span><br><span class="line">    where: &#123;</span><br><span class="line">        applyStatus: <span class="string">"2"</span>,</span><br><span class="line">        customerStatus: <span class="string">"0"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 查询条件</span></span><br><span class="line">    search: [&#123;</span><br><span class="line">        label: <span class="string">'请输入单位名称'</span>,  <span class="comment">// input的placeholder</span></span><br><span class="line">        column: <span class="string">'companyName'</span>,  <span class="comment">// input name</span></span><br><span class="line">        type: <span class="string">'input'</span>,          <span class="comment">// input类型</span></span><br><span class="line">        disabled: <span class="literal">true</span>,         <span class="comment">// 不可编辑</span></span><br><span class="line">        width: <span class="number">200</span>              <span class="comment">// width: 0 即为隐藏</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        label: <span class="string">'单位类型'</span>,</span><br><span class="line">        column: <span class="string">'companyCategory'</span>,</span><br><span class="line">        type: <span class="string">'select'</span>,             <span class="comment">// 下拉列表</span></span><br><span class="line">        enutype: <span class="string">'company_category'</span>,<span class="comment">// 枚举类型</span></span><br><span class="line">        defaultValue: <span class="string">"2"</span>,          <span class="comment">// 默认值</span></span><br><span class="line">        search: <span class="literal">true</span>                <span class="comment">// 启用layui可搜索下拉列表</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        label: <span class="string">'请选择开展时间'</span>,</span><br><span class="line">        column: <span class="string">'startDate'</span>,</span><br><span class="line">        type: <span class="string">'date'</span>,           <span class="comment">// 时间控件</span></span><br><span class="line">        width: <span class="number">150</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        label: <span class="string">'查询更多'</span>,</span><br><span class="line">        column: <span class="string">'chooseMore'</span>,</span><br><span class="line">        type: <span class="string">'link'</span>,           <span class="comment">// 链接类型</span></span><br><span class="line">        width: <span class="number">60</span>,</span><br><span class="line">        onClick: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"a"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;],</span><br><span class="line">    <span class="comment">// 工具栏按钮</span></span><br><span class="line">    tools: [&#123;</span><br><span class="line">        name: <span class="string">"导入"</span>,</span><br><span class="line">        icon: <span class="string">'&amp;#xe681;'</span>,</span><br><span class="line">        type: <span class="string">'upload'</span>,</span><br><span class="line">        url: <span class="string">'crm/customer/excel'</span>,</span><br><span class="line">        exts: <span class="string">'xls'</span>,</span><br><span class="line">        callback: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 上传类型，上传完成后的回调，推荐后台使用多线程处理</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;，&#123;</span><br><span class="line">        name: <span class="string">"新增"</span>,</span><br><span class="line">        icon: <span class="string">'&amp;#xe654;'</span>,</span><br><span class="line">        callback: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 工具栏按钮</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;],</span><br><span class="line">    <span class="comment">// table列</span></span><br><span class="line">    cols: [[ </span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'checkbox'</span>&#125; <span class="comment">// 多选框</span></span><br><span class="line">        , &#123;<span class="attr">field</span>: <span class="string">'companyName'</span>, <span class="attr">title</span>: <span class="string">'单位名称'</span>, <span class="attr">sort</span>:<span class="literal">true</span>, <span class="attr">width</span>: <span class="number">200</span>&#125;</span><br><span class="line">        , &#123;<span class="attr">field</span>: <span class="string">'companyCategory'</span>, <span class="attr">title</span>: <span class="string">'单位类别'</span>, <span class="attr">width</span>: <span class="number">100</span>, <span class="attr">type</span>: <span class="string">'select'</span>, <span class="attr">enu</span>: <span class="string">'company_category'</span>&#125; <span class="comment">// 此列进行枚举类型转换，值转为名称显示</span></span><br><span class="line">    ]],</span><br><span class="line">    <span class="comment">// 行内操作按钮</span></span><br><span class="line">    active: [&#123;</span><br><span class="line">        type: <span class="string">"edit"</span>,</span><br><span class="line">        url: <span class="string">""</span>,</span><br><span class="line">        dataId: <span class="string">""</span>,</span><br><span class="line">        area: [<span class="string">'600px'</span>, <span class="string">'500px'</span>],</span><br><span class="line">        template: <span class="string">'pages/merchant/add-product.html'</span>,</span><br><span class="line">        onOpen: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        type: <span class="string">"delete"</span>,</span><br><span class="line">        dataId: <span class="string">""</span>,</span><br><span class="line">        url: <span class="string">""</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        type: <span class="string">"add"</span>,</span><br><span class="line">        url: <span class="string">""</span>,</span><br><span class="line">        area: [<span class="string">'450px'</span>, <span class="string">'350px'</span>],</span><br><span class="line">        template: <span class="string">'pages/merchant/add-product.html'</span>,</span><br><span class="line">        onOpen: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;，&#123; </span><br><span class="line">        type: <span class="string">"btn"</span>,</span><br><span class="line">        id: <span class="string">"checkBooth"</span>,</span><br><span class="line">        value: <span class="string">"审核"</span>, <span class="comment">// 按钮名称</span></span><br><span class="line">        onClick: <span class="function"><span class="keyword">function</span> (<span class="params">row</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(row)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;],</span><br><span class="line">    <span class="comment">// 行内事件回调</span></span><br><span class="line">    onRowEvent: <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> data = obj.data;</span><br><span class="line">        <span class="keyword">if</span> (obj.event === <span class="string">'changeStatus'</span>) &#123;</span><br><span class="line">            layer.open(&#123;</span><br><span class="line">                title: <span class="string">"修改状态"</span></span><br><span class="line">                , <span class="attr">content</span>: <span class="string">'&lt;div class="layui-form"&gt;'</span> +</span><br><span class="line">                <span class="string">'&lt;select name="approvalStatus" by-filter="select" by-label="审核状态" by-enutype="approvalStatus" by-default="'</span>+data.approvalStatus+<span class="string">'"&gt;&lt;/select&gt;'</span> +</span><br><span class="line">                <span class="string">'&lt;/div&gt;'</span></span><br><span class="line">                , <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    byselect.render();</span><br><span class="line">                    form.render();</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// ajax发送请求</span></span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj.event === <span class="string">'changeResult'</span>) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ihave.news/post/knowledge-repo/aliyun-config-note.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1651,164 +1791,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/photo/camera-properties.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/photo/camera-properties.html" itemprop="url">相机参数详解</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T23:47:36+08:00">2017-03-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/photo/" itemprop="url" rel="index"><span itemprop="name">photo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="光圈"><a href="#光圈" class="headerlink" title="光圈"></a>光圈</h2><h3 id="特性一：控制进光量"><a href="#特性一：控制进光量" class="headerlink" title="特性一：控制进光量"></a>特性一：控制进光量</h3><p>光圈的数值越小，光圈孔径越大，进光量越多，画面也就越明亮。</p>
-<p>光圈的数值越大，光圈孔径越小，进光量越少，画面也就越灰暗。</p>
-<p><img src="http://2c.zol-img.com.cn/product/68_500x2000/116/ceu3k4UUJ6aN.jpg" alt="guangquan"></p>
-<h3 id="特性二：控制景深"><a href="#特性二：控制景深" class="headerlink" title="特性二：控制景深"></a>特性二：控制景深</h3><p>光圈的数值越小，光圈孔径越大，景深越浅，背景虚化越明显。</p>
-<p>光圈的数值越大，光圈孔径越小，景深越深，背景虚化越不明显。</p>
-<p><img src="http://2d.zol-img.com.cn/product/68_500x2000/123/ceR7IjGHm7CmI.jpg" alt="jingshen"></p>
-<p>建议在拍摄风景的时候尽量使用<strong>F8</strong>、<strong>F11</strong>这样的小光圈拍摄，这样拍出来的风景照片远近都是清楚的。</p>
-<p>而在拍摄人像的时候可以选择<strong>F4</strong>、<strong>F2</strong>这样的大光圈拍摄，大光圈可以很好的虚化背景来突出主体人物。</p>
-<h2 id="快门"><a href="#快门" class="headerlink" title="快门"></a>快门</h2><h3 id="特性一：控制进光量-1"><a href="#特性一：控制进光量-1" class="headerlink" title="特性一：控制进光量"></a>特性一：控制进光量</h3><p>快门速度为“秒”，常见速度有：1, 1/2, 1/8, 1/15, 1/30, 1/60, 1/125, 1/250, 1/500, 1/1000, 1/2000等。相邻两级快门速度的曝光量相差一倍。</p>
-<p>一般来说人手持相机拍摄时快门速度不能低于1/30秒，不然很容易因为抖动而拍虚。</p>
-<p>快门速度越快，光线通过时间越短，画面越暗。</p>
-<p>快门速度越慢，光线通过时间越长，画面越亮。</p>
-<h3 id="特性二：不同的拍摄效果"><a href="#特性二：不同的拍摄效果" class="headerlink" title="特性二：不同的拍摄效果"></a>特性二：不同的拍摄效果</h3><p>高速快门一般用于拍摄高速运动的物体、转瞬即逝的画面。<br>低速快门可以拍摄出过程美，比如夜晚的车水马龙。</p>
-<p>快门速度越快，越能抓拍瞬间，表现瞬间美。</p>
-<p>快门速度越慢，越能捕捉过程，表现过程美。</p>
-<h2 id="光圈和快门合理利用"><a href="#光圈和快门合理利用" class="headerlink" title="光圈和快门合理利用"></a>光圈和快门合理利用</h2><p>相机拨盘上有A档（光圈优先）和S档（快门优先）。</p>
-<p>A档模式下，可以通过改变光圈的大小来控制景深，相机会保证曝光量的前提下自动围棋匹配合适的快门速度。A档的优势是使用者只需关心拍摄的景深，而不用过度考虑快门速度。</p>
-<p>S档模式下，可以大概选定一个快门速度，相机会自动调节光圈大小，这样可以保证在拍摄高速运动的物体时拥有稳定的快门速度，而不会拍糊。行人1/125足够，下落的水滴要1/1000速度。</p>
-<p>总结：<br><strong>光圈</strong>：光圈的数值越小，光圈孔径越大，进光量越多，画面就越明亮，景深越浅。光圈的数值越大，光圈孔径越小，进光量越少，画面就越灰暗，景深越深。</p>
-<p><strong>快门</strong>：快门速度越快，光线通过时间越短，画面越暗，越能抓拍瞬间。快门速度越慢，光线通过时间越长，画面越亮，越能表现过程</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1860,7 +1842,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

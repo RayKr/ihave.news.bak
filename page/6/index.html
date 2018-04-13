@@ -283,6 +283,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/uncategorized/mysql-foregion-key.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tsunglei Ching">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iHave.News">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/uncategorized/mysql-foregion-key.html" itemprop="url">mysql外键约束的多种方式</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-28T11:10:26+08:00">2016-05-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>外键约束对子表的含义:<br>如果在父表中找不到候选键,则不允许在子表上进行insert/update</p>
+<p>外键约束对父表的含义:<br>在父表上进行update/delete以更新或删除在子表中有一条或多条对应匹配行的候选键时,父表的行为取决于在定义子表的外键时指定的on update/on delete子句, InnoDB支持５种方式, 分列如下</p>
+<ul>
+<li><p>cascade方式<br>在父表上update/delete记录时，同步update/delete掉子表的匹配记录<br>On delete cascade从mysql3.23.50开始可用; on update cascade从mysql4.0.8开始可用</p>
+</li>
+<li><p>set null方式<br>在父表上update/delete记录时，将子表上匹配记录的列设为null<br>要注意子表的外键列不能为not null<br>On delete set null从mysql3.23.50开始可用; on update set null从mysql4.0.8开始可用</p>
+</li>
+<li><p>No action方式<br>如果子表中有匹配的记录,则不允许对父表对应候选键进行update/delete操作<br>这个是ANSI SQL-92标准,从mysql4.0.8开始支持</p>
+</li>
+<li><p>Restrict方式<br>同no action, 都是立即检查外键约束</p>
+</li>
+<li><p>Set default方式<br>解析器认识这个action,但Innodb不能识别，不知道是什么意思．．．<br>注意：trigger不会受外键cascade行为的影响,即不会解发trigger</p>
+</li>
+</ul>
+<p>在MySQL中，与ＳＱＬ标准相违背的三点</p>
+<ol>
+<li>如果在父表中有多个key值相同，那么在进行外键check时,会当成有相同key值的其他行不存在; 比如当定义了一个restrict行为外键时,一个子表行对应到多个父表行(具有相同key值), Innodb不允许删除父表上的所有这些行</li>
+</ol>
+<ol>
+<li><p>父子表是同一个表,自我参照时不允许指定on update cascade, on update set null<br>从mysql4.0.13开始，允许同一个表上的on delete set null<br>从mysql4.0.21开始，允许同一个表上的on delete cascade<br>但级联层次不能超出15</p>
+</li>
+<li><p>Innodb在检查unique,constraint约束时，是row by row而不是语句或事务结束;SQL标准中对constraint的检查是在语句执行完成时</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ihave.news/post/java-framework/springmvc.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1605,157 +1749,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ihave.news/post/oracle/oracle-auto-increment.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tsunglei Ching">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iHave.News">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/oracle/oracle-auto-increment.html" itemprop="url">Oracle自增ID的实现方式</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-16T16:10:09+08:00">2016-05-16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>MySql关于自增ID的实现非常简单，只需要在DDL语句中定义一个<code>AUTO_INCREMENT</code>即可，而Oracle不行。<br>基本理念是使用Oracle序列<code>Sequences</code>，创建触发器<code>Trigger</code>，在每次插入表中数据时，检查自增段是否为空，如果为空则取出下一个序列值插入到该字段中。</p>
-<ol>
-<li><p>创建测试表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">number</span>,</span><br><span class="line">  <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),</span><br><span class="line">  age <span class="built_in">number</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建序列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> stu_seq</span><br><span class="line"><span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span> <span class="comment">--每次加1</span></span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">1</span>  <span class="comment">--从1开始</span></span><br><span class="line"><span class="keyword">nomaxvalue</span>  <span class="comment">--不设置最大值</span></span><br><span class="line"><span class="keyword">nocycle</span>  <span class="comment">--一直累加，不循环</span></span><br><span class="line">nocache  <span class="comment">--不建缓冲区</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/oracle/oracle-auto-increment.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1807,7 +1800,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
